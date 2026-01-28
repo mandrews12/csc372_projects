@@ -1,0 +1,30 @@
+body {
+    background-color: black;
+}
+
+h1{
+    font-family: Georgia;
+    color: white;
+}
+
+h2{
+    font-family: Georgia;
+    color: white;
+}
+
+li{
+    font-family: Helvetica;
+    color: white;
+}
+
+.artist {
+    border: 1px solid red;
+    padding: 5px;
+}
+
+div {
+    padding: 10px;
+    border: 3px dotted yellow;
+    width: 300px;
+    text-align: center;
+}
