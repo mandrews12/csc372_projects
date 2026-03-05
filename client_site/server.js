@@ -21,6 +21,10 @@ const handlebars = require('express-handlebars').create({
     eq: (a, b) => a === b
   }
 });
+
+// Load item data from JSON file
+const items = require('./data/items.json');
+
 // Configure Handlebars as the view engine.
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -38,7 +42,7 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/products', (req, res) => {
-  res.render('products', { pageTitle: 'Shop' });
+  res.render('products', { pageTitle: 'Shop', items });
 });
 // A catch-all route that sets the status code to 404 and renders a custom 404.handlebars view.
 app.use(/.*/, (req, res) => {

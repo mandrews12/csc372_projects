@@ -4,42 +4,9 @@
 
     {{!  Category Sections }}
     <div id="cards" class="category">
-        <div class="item" data-description="Assorted greeting cards with unique designs." data-stock="In Stock">
-            <img src="images/product_placeholder.png" alt="Assorted Cards" height="150">
-            <h3>Assorted Cards</h3>
-            <p>$10.00</p>
-            <button class="view-details">View Details</button>
-        </div>
-        <div class="item" data-description="Handmade papercraft items with intricate designs." data-stock="In Stock">
-            <img src="images/product_placeholder.png" alt="Papercraft Item" height="150">
-            <h3>Papercraft Item</h3>
-            <p>$15.00</p>
-            <button class="view-details">View Details</button>
-        </div>
-        <div class="item" data-description="Stunning alcohol ink flower artwork on canvas." data-stock="In Stock">
-            <img src="images/product_placeholder.png" alt="Alcohol Ink Flower" height="150">
-            <h3>Alcohol Ink Flower</h3>
-            <p>$30.00</p>
-            <button class="view-details">View Details</button>
-        </div>
-        <div class="item" data-description="Alcohol ink flower designs on decorative tiles." data-stock="In Stock">
-            <img src="images/product_placeholder.png" alt="Alcohol Ink Tile" height="150">
-            <h3>Alcohol Ink Tile</h3>
-            <p>$25.00</p>
-            <button class="view-details">View Details</button>
-        </div>
-        <div class="item" data-description="Elegant shadowbox displays for your cherished items." data-stock="In Stock">
-            <img src="images/product_placeholder.png" alt="Shadowbox" height="150">
-            <h3>Shadowbox</h3>
-            <p>$40.00</p>
-            <button class="view-details">View Details</button>
-        </div>
-        <div class="item" data-description="A beautiful handmade cardinal lantern, perfect for home decor." data-stock="In Stock">
-            <img src="images/product_placeholder.png" alt="Cardinal Lantern" height="150">
-            <h3>Cardinal Lantern</h3>
-            <p>$25.00</p>
-            <button class="view-details">View Details</button>
-        </div>
+        {{#each items}}
+            {{> item}}
+        {{/each}}
     </div>
 </div>
 
