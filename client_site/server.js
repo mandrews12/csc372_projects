@@ -1,84 +1,60 @@
-// Load the http module
-const http = require('http');
-// Load the file system module
-const fs = require('fs');
-// Constant that stores the port number (e.g., 3000)
+/*
+Meghan Andrews - 2/28/2026
+This file sets up an Express server to serve a client-side website. 
+It uses Express Handlebars as the templating engine to render dynamic views. 
+The server listens on port 3000 and serves static files from the 'public' directory. 
+It defines routes for the home page, about page, contact page, and products page, as well as catch-all routes for 404 and 500 errors.
+*/
+
+// Load the Express module.
+const express = require('express');
+// Define the port number (e.g., 3000).
 const PORT = 3000;
+// Create an Express application.
+const app = express();
+// Configure Express to serve static files from the public folder.
+app.use(express.static('public'));
+// Load the Express Handlebars module.
+const handlebars = require('express-handlebars').create({ 
+  defaultLayout: 'main',
+  helpers: {
+    eq: (a, b) => a === b
+  }
+});
 
-function serveStaticFile(res, path, contentType, resCode) {
-    if (!resCode) {
-        resCode = 200;
-    }
+// Load item data from JSON file
+const items = require('./data/items.json');
 
-    // Attempts to read the file at the given path
-    fs.readFile(__dirname + path, function(err, data) {
-        if (err) {
-            // Sets status code 500 if a server error occurs
-            console.log(err);
-            res.writeHead(500, { 'Content-Type': 'text/plain' });
-            res.end('500 - Internal Error');
-        } else {
-            // Sets status code 200 when successful (or passed-in resCode)
-            // Sends the correct Content-Type header based on the file type
-            res.writeHead(resCode, { 'Content-Type': contentType });
-            // Sends the file data in the response
-            res.end(data);
-        }
-    });
-}
+// Configure Handlebars as the view engine.
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
 
-// Use createServer to:
-http.createServer((request, response) => {
+app.get(['/','/index'], (req, res) => {
+  res.render('index', { pageTitle: 'Home' });
+});
 
-    // Normalize the URL path by removing query strings and trailing slashes,
-    // and converting to lowercase.
-    let path = request.url.split('?')[0].toLowerCase();
-    if (path !== '/' && path.endsWith('/')) {
-        path = path.slice(0, -1);
-    }
-    console.log(path);
+app.get('/about', (req, res) => {
+  res.render('about', { pageTitle: 'About' });
+});
 
-    // Map the URL paths to files inside the public folder.
-    // Serve HTML pages, CSS files, JavaScript files, and images
-    switch (path) {
-        case '/':
-            serveStaticFile(response, '/public/index.html', 'text/html');
-            break;
-        case '/index':
-            serveStaticFile(response, '/public/index.html', 'text/html');
-            break;
-        case '/about':
-            serveStaticFile(response, '/public/about.html', 'text/html');
-            break;
-        case '/contact':
-            serveStaticFile(response, '/public/contact.html', 'text/html');
-            break;
-        case '/products':
-            serveStaticFile(response, '/public/products.html', 'text/html');
-            break;
-        default:
-            // Serve CSS, JS, and image files by mapping the path directly
-            if (path.endsWith('.css')) {
-                serveStaticFile(response, '/public' + path, 'text/css');
-            } else if (path.endsWith('.js')) {
-                serveStaticFile(response, '/public' + path, 'application/javascript');
-            } else if (path.endsWith('.png')) {
-                serveStaticFile(response, '/public' + path, 'image/png');
-            } else if (path.endsWith('.jpg') || path.endsWith('.jpeg')) {
-                serveStaticFile(response, '/public' + path, 'image/jpeg');
-            } else if (path.endsWith('.gif')) {
-                serveStaticFile(response, '/public' + path, 'image/gif');
-            } else if (path.endsWith('.svg')) {
-                serveStaticFile(response, '/public' + path, 'image/svg+xml');
-            } else {
-                // If the requested path or file is not found,
-                // serve custom 404 page and set HTTP status code to 404.
-                serveStaticFile(response, '/public/404.html', 'text/html', 404);
-            }
-            break;
-    }
+app.get('/contact', (req, res) => {
+  res.render('contact', { pageTitle: 'Contact' });
+});
 
-// Tell the server which port to listen on and output the server URL to the console.
-}).listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+app.get('/products', (req, res) => {
+  res.render('products', { pageTitle: 'Shop', items });
+});
+// A catch-all route that sets the status code to 404 and renders a custom 404.handlebars view.
+app.use(/.*/, (req, res) => {
+  res.status(404).render('404', { pageTitle: 'Page Not Found' });
+});
+// A 500 error handler that sets the status code to 500 and renders a custom 500.handlebars view.
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).render('500', { pageTitle: 'Server Error' });
+});
+
+// Configure Express to serve static files from the public folder.
+app.listen(PORT, () => {
+  console.log(`Express server running on http://localhost:${PORT}`);
 });

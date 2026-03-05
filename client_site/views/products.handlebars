@@ -1,0 +1,27 @@
+<div class = "card">
+
+    <h1>Shop</h1>
+
+    {{!  Category Sections }}
+    <div id="cards" class="category">
+        {{#each items}}
+            {{> item}}
+        {{/each}}
+    </div>
+</div>
+
+{{! Product Modal that is called using JavaScript and is placeholders that will be dynamically filled with information }}
+<div id="product-modal" class="modal">
+    <div class="modal-content">
+        <span class="close"> x </span>
+        <img id="modal-image" src="" alt="" height="300">
+        <div class="text-content">
+            <h2 id="modal-title"></h2>
+            <p id="modal-price"></p>
+            <p id="modal-description"></p>
+            <p id="modal-stock"></p>
+            <button id="buy-now">Buy Now</button>
+            <button id="contact-seller">Contact Seller</button>
+        </div>
+    </div>
+</div>

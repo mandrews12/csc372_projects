@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Assorted Cards",
+    "price": 10.00,
+    "image": "images/product_placeholder.png",
+    "description": "Assorted greeting cards with unique designs.",
+    "stock": "In Stock",
+    "featured": true
+  },
+  {
+    "name": "Papercraft Item",
+    "price": 15.00,
+    "image": "images/product_placeholder.png",
+    "description": "Handmade papercraft items with intricate designs.",
+    "stock": "In Stock",
+    "featured": true
+  },
+  {
+    "name": "Alcohol Ink Flower",
+    "price": 30.00,
+    "image": "images/product_placeholder.png",
+    "description": "Stunning alcohol ink flower artwork on canvas.",
+    "stock": "In Stock",
+    "featured": false
+  },
+  {
+    "name": "Alcohol Ink Tile",
+    "price": 25.00,
+    "image": "images/product_placeholder.png",
+    "description": "Alcohol ink flower designs on decorative tiles.",
+    "stock": "In Stock",
+    "featured": false
+  },
+  {
+    "name": "Shadowbox",
+    "price": 40.00,
+    "image": "images/product_placeholder.png",
+    "description": "Elegant shadowbox displays for your cherished items.",
+    "stock": "In Stock",
+    "featured": false
+  },
+  {
+    "name": "Cardinal Lantern",
+    "price": 25.00,
+    "image": "images/product_placeholder.png",
+    "description": "A beautiful handmade cardinal lantern, perfect for home decor.",
+    "stock": "In Stock",
+    "featured": true
+  }
+]
