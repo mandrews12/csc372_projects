@@ -5,7 +5,8 @@
     "image": "images/product_placeholder.png",
     "description": "Assorted greeting cards with unique designs.",
     "stock": "In Stock",
-    "featured": true
+    "featured": true,
+    "category": "cards"
   },
   {
     "name": "Papercraft Item",
@@ -13,7 +14,8 @@
     "image": "images/product_placeholder.png",
     "description": "Handmade papercraft items with intricate designs.",
     "stock": "In Stock",
-    "featured": true
+    "featured": true,
+    "category": "papercrafts"
   },
   {
     "name": "Alcohol Ink Flower",
@@ -21,7 +23,8 @@
     "image": "images/product_placeholder.png",
     "description": "Stunning alcohol ink flower artwork on canvas.",
     "stock": "In Stock",
-    "featured": false
+    "featured": false,
+    "category": "ink-flowers"
   },
   {
     "name": "Alcohol Ink Tile",
@@ -29,7 +32,8 @@
     "image": "images/product_placeholder.png",
     "description": "Alcohol ink flower designs on decorative tiles.",
     "stock": "In Stock",
-    "featured": false
+    "featured": false,
+    "category": "ink-flowers"
   },
   {
     "name": "Shadowbox",
@@ -37,7 +41,8 @@
     "image": "images/product_placeholder.png",
     "description": "Elegant shadowbox displays for your cherished items.",
     "stock": "In Stock",
-    "featured": false
+    "featured": false,
+    "category": "shadowboxes"
   },
   {
     "name": "Cardinal Lantern",
@@ -45,6 +50,7 @@
     "image": "images/product_placeholder.png",
     "description": "A beautiful handmade cardinal lantern, perfect for home decor.",
     "stock": "In Stock",
-    "featured": true
+    "featured": true,
+    "category": "papercrafts"
   }
 ]

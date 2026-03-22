@@ -1,58 +1,86 @@
 {{!-- views/index.handlebars – only the page‑specific content --}}
-<div class = "card">
-    <h1>Welcome to Criter Heaven Crafts!</h1>
-    <button onclick="location.href='products.html'">Shop Now</button>
+<div class = "header-card" id="welcome-card">
+    <p> HANDCRAFTED GOODS </p>
+    <h1>Critter Haven Crafts</h1>
+    <h3>Handmade pieces that bring warmth and personality into your everyday life</p>
+    <button onclick="location.href='products.html'">Explore Collection</button>
+</div>
+
+{{!  A brief overview of the brand that links to the About page }}
+<div class = "card" id="about">
+    <div class="about-content">
+        <h1>Our Story</h1>
+        <hr>
+        <p>Criter Heaven Crafts creates handmade, one-of-a-kind pieces designed to bring warmth, creativity, and personality into everyday life. Each item is thoughtfully crafted with care and attention to detail, offering unique gifts and décor you won’t find in mass-produced stores.   </p>
+        <button onclick="location.href='about.html'">Learn More</button>
+    </div>
 </div>
 
 {{! Place for featured items that are new to the site - currently is hard coded until database connection is made then will be moved to partials }}
-<div class = "card">
+<div class = "card" id = "featured">
     <h1>Featured Items</h1>
+    <hr>
     <div class="featured-items">
         <div class="item">
         <img src="images/product_placeholder.png" alt="Cardinal Lantern Img" height="150">
             <h3>Cardinal Lantern</h3>
             <p>$25.00</p>
-            <button onclick="location.href='/products'">View Details</button>
         </div>
         <div class="item">
         <img src="images/product_placeholder.png" alt="Cardinal Lantern Img" height="150">
         <h3>Cardinal Lantern</h3>
         <p>$25.00</p>
-        <button onclick="location.href='/products'">View Details</button>
     </div>
     <div class="item">
         <img src="images/product_placeholder.png" alt="Cardinal Lantern Img" height="150">
         <h3>Cardinal Lantern</h3>
         <p>$25.00</p>
-        <button onclick="location.href='/products'">View Details</button>
     </div>
     <div class="item">
         <img src="images/product_placeholder.png" alt="Alcohol Ink Flower Img" height="150">
             <h3>Alcohol Ink Flower</h3>
             <p>$30.00</p>
-            <button onclick="location.href='/products'">View Details</button>
         </div>
         <div class="item">
         <img src="images/product_placeholder.png" alt="Asorted Cards Img" height="150">
         <h3>Asorted Cards</h3>
             <p>$10.00</p>
-            <button onclick="location.href='/products'">View Details</button>
         </div>
     </div>
 </div>
 
-{{!  A brief overview of the brand that links to the About page }}
-<div class = "card" id="about">
-    <h2>About Criter Heaven Crafts</h2>
-    <p>Criter Heaven Crafts creates handmade, one-of-a-kind pieces designed to bring warmth, creativity, and personality into everyday life. Each item is thoughtfully crafted with care and attention to detail, offering unique gifts and décor you won’t find in mass-produced stores.   </p>
-    <button onclick="location.href='about.html'">Learn More</button>
-</div>
-
 {{! A section highlighting the benefits of shopping with Criter Heaven Crafts }}
-<div class = "card" id = "benefits">
-    <h2>Why Choose Us?</h2>
-    <p><strong>Unique Designs:</strong> Each item is crafted with care, ensuring you receive a one-of-a-kind piece.</p> 
-    <p><strong>Quality Materials:</strong> We use only the finest materials to create durable and beautiful crafts.</p>     
-    <p><strong>Support Artisans:</strong> By shopping with us, you support local artisans and their craft.</p>
-    <p><strong>Customer Satisfaction:</strong> We prioritize your satisfaction and strive to provide excellent customer service.</p>
+<div class="card" id="benefits">
+    <h1>Why Choose Us</h1>
+    <hr>
+    <div class="benefit-grid">
+        <div class="benefit">
+            <i class="fa-solid fa-paintbrush"></i>
+            <div>
+                <h3>Unique Designs</h3>
+                <p>Each item is crafted with care, ensuring you receive a one-of-a-kind piece.</p>
+            </div>
+        </div>
+        <div class="benefit">
+            <i class="fa-solid fa-gem"></i>
+            <div>
+                <h3>Quality Materials</h3>
+                <p>We use only the finest materials to create durable and beautiful crafts.</p>
+            </div>
+        </div>
+        <div class="benefit">
+            <i class="fa-solid fa-heart"></i>
+            <div>
+                <h3>Support Local Crafters</h3>
+                <p>By shopping with us, you support local artisans and their craft.</p>
+            </div>
+        </div>
+        <div class="benefit">
+            <i class="fa-solid fa-gift"></i>
+            <div>
+                <h3>Perfect Gifts</h3>
+                <p>We prioritize your satisfaction and strive to provide excellent customer service.</p>
+            </div>
+        </div>
+    </div>
 </div>

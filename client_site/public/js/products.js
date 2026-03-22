@@ -72,3 +72,17 @@ buyNowBtn.addEventListener('click', function() {
 contactSellerBtn.addEventListener('click', function() {
     window.location.href = 'mailto:charm_tails@yahoo.com?subject=Inquiry about ' + modalTitle.textContent;
 });
+
+// toggles visible products based on category selection
+document.querySelectorAll('.cat-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const category = this.getAttribute('data-category');
+        document.querySelectorAll('.item').forEach(item => {
+            if (category === 'all' || item.getAttribute('data-category') === category) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});

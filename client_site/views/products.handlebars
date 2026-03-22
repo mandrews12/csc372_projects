@@ -1,7 +1,19 @@
+<div class = "header-card">
+    <h1>Our Shop</h1>
+</div>
+
+<div class="card" id="filters">
+    <h1>Filter by Category</h1>
+    <hr>
+    <div class="cat-options">
+        <button class="cat-btn" data-category="all">All</button>
+        <button class="cat-btn" data-category="papercrafts">Papercrafts</button>
+        <button class="cat-btn" data-category="ink-flowers">Ink Flowers</button>
+        <button class="cat-btn" data-category="shadowboxes">Shadowboxes</button>
+        <button class="cat-btn" data-category="cards">Cards</button>
+    </div>
+</div>
 <div class = "card">
-
-    <h1>Shop</h1>
-
     {{!  Category Sections }}
     <div id="cards" class="category">
         {{#each items}}
@@ -25,3 +37,5 @@
         </div>
     </div>
 </div>
+
+<script src="/js/products.js"></script> 

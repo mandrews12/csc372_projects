@@ -1,60 +1,38 @@
 /*
 Meghan Andrews - 2/28/2026
-This file sets up an Express server to serve a client-side website. 
-It uses Express Handlebars as the templating engine to render dynamic views. 
-The server listens on port 3000 and serves static files from the 'public' directory. 
-It defines routes for the home page, about page, contact page, and products page, as well as catch-all routes for 404 and 500 errors.
+Express server entry point. Wires together middleware,
+routes, and the Handlebars view engine.
 */
-
-// Load the Express module.
+require('dotenv').config();
 const express = require('express');
-// Define the port number (e.g., 3000).
 const PORT = 3000;
-// Create an Express application.
 const app = express();
-// Configure Express to serve static files from the public folder.
+
+app.use(express.json());
 app.use(express.static('public'));
-// Load the Express Handlebars module.
-const handlebars = require('express-handlebars').create({ 
-  defaultLayout: 'main',
-  helpers: {
-    eq: (a, b) => a === b
-  }
+
+const handlebars = require('express-handlebars').create({
+    defaultLayout: 'main',
+    helpers: { eq: (a, b) => a === b }
 });
-
-// Load item data from JSON file
-const items = require('./data/items.json');
-
-// Configure Handlebars as the view engine.
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
+const { setUserLocals } = require('./middleware/auth');
 
-app.get(['/','/index'], (req, res) => {
-  res.render('index', { pageTitle: 'Home' });
-});
+app.use(setUserLocals); 
+// Routes
+app.use('/', require('./routes/index'));
+app.use('/api', require('./routes/api'));
 
-app.get('/about', (req, res) => {
-  res.render('about', { pageTitle: 'About' });
-});
-
-app.get('/contact', (req, res) => {
-  res.render('contact', { pageTitle: 'Contact' });
-});
-
-app.get('/products', (req, res) => {
-  res.render('products', { pageTitle: 'Shop', items });
-});
-// A catch-all route that sets the status code to 404 and renders a custom 404.handlebars view.
+// Error handlers
 app.use(/.*/, (req, res) => {
-  res.status(404).render('404', { pageTitle: 'Page Not Found' });
+    res.status(404).render('404', { pageTitle: 'Page Not Found' });
 });
-// A 500 error handler that sets the status code to 500 and renders a custom 500.handlebars view.
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).render('500', { pageTitle: 'Server Error' });
+    console.error(err.stack);
+    res.status(500).render('500', { pageTitle: 'Server Error' });
 });
 
-// Configure Express to serve static files from the public folder.
 app.listen(PORT, () => {
-  console.log(`Express server running on http://localhost:${PORT}`);
+    console.log(`Express server running on http://localhost:${PORT}`);
 });

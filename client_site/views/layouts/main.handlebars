@@ -7,29 +7,65 @@
     <head>
         <meta charset="UTF-8">
         <meta name="description" content="Criter Heaven Crafts - Unique handmade crafts and artisan products. Discover one-of-a-kind jewelry, home decor, and gifts crafted with care.">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="Criter Heaven Crafts - Gallery">
         <meta property="og:description" content="Explore unique handmade crafts and artisan products at Criter Heaven Crafts. From jewelry to home decor, find the perfect gift crafted with love.">
-        <meta property="og:image" content="documentation/logo.png">
+        <meta property="og:image" content="/documentation/logo.png">
         <meta property="og:url" content="https://criterheavencrafts.com/products.html">
         <meta property="og:type" content="website">
 
         <title>Criter Heaven Crafts - Shop</title> 
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body>
+
+        <!-- LOGIN MODAL -->
+        <div id="loginModal" class="login-modal" style="display: none;">
+            <div class="login-modal-content">
+                <!-- Login View -->
+                <div id="login-view">
+                    <h2>Welcome Back</h2>
+                    <input type="email"    id="login-email"    placeholder="Email" />
+                    <input type="password" id="login-password" placeholder="Password" />
+                    <p id="login-error" style="color:red; display:none;"></p>
+                    <button onclick="handleLogin()">Login</button>
+                    <p>Don't have an account? <a onclick="showSignupView()">Sign up</a></p>
+                </div>
+
+                <!-- Signup View (hidden by default) -->
+                <div id="signup-view" style="display:none;">
+                    <h2>Create Account</h2>
+                    <input type="text"     id="signup-name"     placeholder="Full Name" />
+                    <input type="email"    id="signup-email"    placeholder="Email" />
+                    <input type="password" id="signup-password" placeholder="Password" />
+                    <p id="signup-error" style="color:red; display:none;"></p>
+                    <button onclick="handleSignup()">Sign Up</button>
+                    <p>Already have an account? <a onclick="showLoginView()">Log in</a></p>
+                </div>
+            </div> 
+        </div>
+
         <div class="header">
             <img src="/documentation/logo.png" alt="Criter Heaven Crafts Logo" height="200">
             <nav>
-                <a href="/index" class="{{#if (eq pageTitle 'Home')}}active{{/if}}">Home</a>
-                <a href="/about" class="{{#if (eq pageTitle 'About')}}active{{/if}}">About</a>
+                <a href="/index"    class="{{#if (eq pageTitle 'Home')}}active{{/if}}">Home</a>
+                <a href="/about"    class="{{#if (eq pageTitle 'About')}}active{{/if}}">About</a>
                 <a href="/products" class="{{#if (eq pageTitle 'Shop')}}active{{/if}}">Shop</a>
-                <a href="/contact" class="{{#if (eq pageTitle 'Contact')}}active{{/if}}">Contact</a>
+                <a href="/contact"  class="{{#if (eq pageTitle 'Contact')}}active{{/if}}">Contact</a>
+                <a href="/update_prod" class="{{#if (eq pageTitle 'Update Database')}}active{{/if}}">Update Products</a>
+            
+                <!-- Login button — swapped for username by showUserInNav() after login -->
+                <button id="nav-login-btn" onclick="openLoginModal()">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login
+                </button>
             </nav>
         </div>
         {{{body}}}    
         <footer>
-            <p>Forum - About Us - <a href="mailto:ma17328ma@uri.edu">Contact Us</a></p>
-            <p><em>2026 Criter Heaven Crafts. All rights reserved.</em></p>
+            <h1> Critter Haven Crafts</h1>
+            <p>© 2026 All rights reserved. Handmade with love.</p>
         </footer>
+        <script src="/js/api.js"></script> 
     </body>
 </html>

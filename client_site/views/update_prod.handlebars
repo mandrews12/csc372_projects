@@ -1,0 +1,38 @@
+<div class = "header-card">
+    <h1>Our Shop</h1>
+</div>
+
+<div class="card" id="filters">
+    <h1>Filter by Category</h1>
+    <hr>
+    <div class="cat-options">
+        <button class="cat-btn" category="add"> Add New Item</button>
+        <button class="cat-btn" data-category="update">Update Item</button>
+        <button class="cat-btn" data-category="delete">Delete Item</button>
+    </div>
+</div>
+
+<div class="card" id="add-prod">
+    <h1> Add a New Product</h1>
+    <form>
+        <label for="product_name"> Product Name </label>
+        <input type="text" id="product_name" placeholder="Product Name" name="product_name" required>
+        <label for="category"> Category </label>
+        <select name="category" id="category">
+            <option value="cards">cards</option>
+            <option value="papercrafts">papercrafts</option>
+            <option value="shadowboxes">shadowboxes</option>
+            <option value="ink-flowers">ink-flowers</option>
+            <option value="misc">misc</option>
+        </select>
+        <label for="price"> Price </label>
+        <input type="number" id="price" placeholder="0.00" name="price" required>
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="5" placeholder="Product description" required></textarea>
+        <label for="featued"> Is Featured</label>
+        <input type="checkbox" id="featured" name="featured" required>
+        <label for="stocked"> In Stock</label>
+        <input type="checkbox" id="stocked" name="stocked" required>
+        <input type="submit" value="Add New Product">
+    </form>
+</div>
