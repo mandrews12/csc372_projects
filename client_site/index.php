@@ -1,4 +1,33 @@
 <!-- Meghan Andrews - 2/2/2026 -->
+<?php
+    session_start();
+
+    // Handle login form submission
+    if (isset($_POST['username'])) {
+        $username = $_POST['username'];
+
+        // Store in session
+        $_SESSION['username'] = $username;
+
+        // Store in cookie (1 day)
+        setcookie("username", $username, time() + 86400, "/");
+
+        // Store last visit cookie
+        setcookie("lastVisit", date("Y-m-d H:i:s"), time() + 86400, "/");
+    }
+
+    // Handle logout
+    if (isset($_GET['logout'])) {
+        session_unset();
+        session_destroy();
+
+        setcookie("username", "", time() - 3600, "/");
+
+        header("Location: index.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,30 +42,24 @@
 
     <title>Criter Heaven Crafts</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 
     <body>
-        <!-- FACEBOOK SDK -->
-        <div id="fb-root"></div>
-
         <!-- LOGIN MODAL -->
         <div id="loginModal" class="login-modal" style="display: none;">
             <div class="login-modal-content">
-                <h2>Welcome to Criter Heaven Crafts</h2>
-
-                <div class="fb-login-button"
-                    data-width=""
-                    data-size="large"
-                    data-button-type="continue_with"
-                    data-layout="default"
-                    data-use-continue-as="true">
+                <!-- Login View -->
+                <div id="login-view">
+                    <h2>Welcome Back</h2>
+                    <form method="POST" action="index.php">
+                        <input type="text" name="username" placeholder="User Name" required />
+                        <input type="password" name="password" placeholder="Password" />
+                        <button type="submit">Login</button>
+                    </form>
                 </div>
-                <div class="guest-login">
-                    <br>
-                    <button onclick="continueAsGuest()"> Continue as Guest </button>
-                </div>
-            </div>
+            </div> 
         </div>
 
         <!-- Header -->
@@ -47,18 +70,40 @@
                 <a href="about.php">About</a> 
                 <a href="products.php">Shop</a>
                 <a href="contact.php">Contact</a>
-                <!-- username and profile pic from facebook api call-->
-                <div id="user-info">
-                    <img id="profile-pic" src="images/product_placeholder.png" alt="Profile Picture" height="30" style="display: none;">
-                    <span id="username" style="display: none;"></span>
-                </div>
+                <a href="update_prod.php" >Update Products</a>
+                
+                 <!-- Login button — swapped for username after login -->
+                <?php if (isset($_SESSION['username'])): ?>
+                    <div id="user-info">
+                        <span>
+                            Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>
+                        </span>
+                        <a href="index.php?logout=true">Logout</a>
+                    </div>
+                <?php else: ?>
+                    <button id="nav-login-btn">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </button>
+                <?php endif; ?>
             </nav>
         </div>
 
         <!-- Main Content Sections -->
-        <div class = "card">
-            <h1>Welcome to Criter Heaven Crafts!</h1>
-            <button onclick="location.href='products.html'">Shop Now</button>
+        <div class = "header-card" id="welcome-card">
+            <p> HANDCRAFTED GOODS </p>
+            <h1>Critter Haven Crafts</h1>
+            <h3>Handmade pieces that bring warmth and personality into your everyday life</p>
+            <button onclick="location.href='products.html'">Explore Collection</button>
+        </div>
+
+        <!-- A brief overview of the brand that links to the About page -->
+        <div class = "card" id="about">
+            <div class="about-content">
+                <h1>Our Story</h1>
+                <hr>
+                <p>Criter Heaven Crafts creates handmade, one-of-a-kind pieces designed to bring warmth, creativity, and personality into everyday life. Each item is thoughtfully crafted with care and attention to detail, offering unique gifts and décor you won’t find in mass-produced stores.   </p>
+                <button onclick="location.href='about.html'">Learn More</button>
+            </div>
         </div>
 
         <!-- Place for featured items that are new to the site -->
@@ -98,26 +143,63 @@
             </div>
         </div>
 
-        <!-- A brief overview of the brand that links to the About page -->
-        <div class = "card" id="about">
-            <h2>About Criter Heaven Crafts</h2>
-            <p>Criter Heaven Crafts creates handmade, one-of-a-kind pieces designed to bring warmth, creativity, and personality into everyday life. Each item is thoughtfully crafted with care and attention to detail, offering unique gifts and décor you won’t find in mass-produced stores.   </p>
-            <button onclick="location.href='about.html'">Learn More</button>
+        <!-- A section highlighting the benefits of shopping with Criter Heaven Crafts -->
+        <div class="card" id="benefits">
+            <h1>Why Choose Us</h1>
+            <hr>
+            <div class="benefit-grid">
+                <div class="benefit">
+                    <i class="fa-solid fa-paintbrush"></i>
+                    <div>
+                        <h3>Unique Designs</h3>
+                        <p>Each item is crafted with care, ensuring you receive a one-of-a-kind piece.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <i class="fa-solid fa-gem"></i>
+                    <div>
+                        <h3>Quality Materials</h3>
+                        <p>We use only the finest materials to create durable and beautiful crafts.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <i class="fa-solid fa-heart"></i>
+                    <div>
+                        <h3>Support Local Crafters</h3>
+                        <p>By shopping with us, you support local artisans and their craft.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <i class="fa-solid fa-gift"></i>
+                    <div>
+                        <h3>Perfect Gifts</h3>
+                        <p>We prioritize your satisfaction and strive to provide excellent customer service.</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- A section highlighting the benefits of shopping with Criter Heaven Crafts -->
-        <div class = "card" id = "benefits">
-            <h2>Why Choose Us?</h2>
-            <p><strong>Unique Designs:</strong> Each item is crafted with care, ensuring you receive a one-of-a-kind piece.</p> 
-            <p><strong>Quality Materials:</strong> We use only the finest materials to create durable and beautiful crafts.</p>     
-            <p><strong>Support Artisans:</strong> By shopping with us, you support local artisans and their craft.</p>
-            <p><strong>Customer Satisfaction:</strong> We prioritize your satisfaction and strive to provide excellent customer service.</p>
+        <!-- Displaying Session Data -->
+         <div class="card">
+            <h2>Visitor Info</h2>
+
+            <?php if (isset($_COOKIE['username'])): ?>
+                <p>User: <?php echo htmlspecialchars($_COOKIE['username']); ?></p>
+            <?php endif; ?>
+
+            <?php if (isset($_COOKIE['lastVisit'])): ?>
+                <p>Last Visit: <?php echo htmlspecialchars($_COOKIE['lastVisit']); ?></p>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['username'])): ?>
+                <p>Session User: <?php echo htmlspecialchars($_SESSION['username']); ?></p>
+            <?php endif; ?>
         </div>
 
         <!-- Footer Section - copyright and contact information-->
         <footer>
-            <p> Forum -  About Us - <a href="mailto:charm_tails@yahoo.com"> Get in Touch </a> </p>
-            <p><em>2026 Criter Heaven Crafts. All rights reserved.</em></p>
+            <h1> Critter Haven Crafts</h1>
+            <p>© 2026 All rights reserved. Handmade with love.</p>
         </footer>
 
         <script src="js/api.js"></script> 

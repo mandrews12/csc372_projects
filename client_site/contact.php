@@ -14,6 +14,7 @@
 
     <title>Criter Heaven Crafts</title> 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 
@@ -27,25 +28,33 @@
             <a href="about.php">About</a> 
             <a href="products.php">Gallery</a>
             <a href="contact.php" class="active">Contact</a>
+            <a href="update_prod.php" >Update Products</a>
         </nav>
     </div>
 
     <!-- Main Content Sections -->
-    <div class = "card">
-        <h1>Contact Us</h1>
+    <div class = "header-card">
+    <h1>Contact Us</h1>
+    </div>
+    <div class="card" id="contact-form">
+        <h1> Get in Touch</h1>
+        <hr>
+        <p> Have a question, custom order request, or just want to say hello? We'd love to hear from you!</p>
         <form action="mailto:charm_tails@yahoo.com" method="post" enctype="text/plain">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name" required><br><br>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br><br>
-            <label for="message">Message:</label><br>
-            <textarea id="message" name="message" rows="5" required></textarea><br><br>
-            <input type="submit" value="Send">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Full Name" name="name" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+            <input type="submit" value="Send Message">
         </form>
-    <!-- Footer Section - copyright and contact information-->
-    <footer>
-        <p> Forum -  About Us - <a href="mailto:ma17328ma@uri.edu"> Contact Us</a> </p>
-        <p><em>2026 Criter Heaven Crafts. All rights reserved.</em></p>
-    </footer>
-</body>
+    </div>
+
+        <!-- Footer Section - copyright and contact information-->
+        <footer>
+            <h1> Critter Haven Crafts</h1>
+            <p>© 2026 All rights reserved. Handmade with love.</p>
+        </footer>
+    </body>
 </html>

@@ -62,6 +62,7 @@
 
         <title>Criter Heaven Crafts - Shop</title> 
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
 
 
@@ -75,13 +76,29 @@
                 <a href="about.php">About</a> 
                 <a href="products.php" class="active">Shop</a>
                 <a href="contact.php">Contact</a>
+                <a href="update_prod.php" >Update Products</a>
             </nav>
         </div>
 
+        <div class = "header-card">
+            <h1>Our Shop</h1>
+        </div>
+
+        <div class="card" id="filters">
+            <h1>Filter by Category</h1>
+            <hr>
+            <div class="cat-options">
+                <button class="cat-btn" data-category="all">All</button>
+                <button class="cat-btn" data-category="papercrafts">Papercrafts</button>
+                <button class="cat-btn" data-category="ink-flowers">Ink Flowers</button>
+                <button class="cat-btn" data-category="shadowboxes">Shadowboxes</button>
+                <button class="cat-btn" data-category="cards">Cards</button>
+            </div>
+        </div>
         <div class = "card">
             <h1>Shop</h1>
             <!-- Category Sections -->
-             <div id="cards" class="category"></div>
+             <div id="cards" class="category">
              <?php foreach ($items as $item) { ?>
                 <div class="item" data-description="<?php echo $item->description; ?>" data-stock="<?php echo $item->inStock(); ?>">
                     <img src="images/product_placeholder.png" alt="<?php echo $item->name; ?>" height="150">
@@ -111,8 +128,8 @@
 
         <!-- Footer Section - copyright and contact information-->
         <footer>
-            <p> Forum -  About Us - <a href="mailto:charm_tails@yahoo.com"> Contact Us</a> </p>
-            <p><em>2026 Criter Heaven Crafts. All rights reserved.</em></p>
+            <h1> Critter Haven Crafts</h1>
+            <p>© 2026 All rights reserved. Handmade with love.</p>
         </footer>
 
         <script src="js/products.js"></script>

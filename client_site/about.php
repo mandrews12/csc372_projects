@@ -13,41 +13,47 @@
 
     <title>Criter Heaven Crafts</title> 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+    <body>
 
+        <!-- Header with Logo and Navigation -->
+        <div class="header">
+            <img src="documentation/logo.png" alt="Criter Heaven Crafts Logo" height="200">
+            <nav>
+                <a href="index.php">Home</a>
+                <a href="about.php" class="active">About</a> 
+                <a href="products.php">Gallery</a>
+                <a href="contact.php">Contact</a>
+                <a href="update_prod.php" >Update Products</a>
+            </nav>
+        </div>
 
-<body>
+        <div class = "header-card">
+            <h1>About Us</h1>
+        </div>
 
-    <!-- Header with Logo and Navigation -->
-    <div class="header">
-        <img src="documentation/logo.png" alt="Criter Heaven Crafts Logo" height="200">
-        <nav>
-            <a href="index.php">Home</a>
-            <a href="about.php" class="active">About</a> 
-            <a href="products.php">Gallery</a>
-            <a href="contact.php">Contact</a>
-        </nav>
-    </div>
+        <!-- Main Content Sections -->
+        <div class = "left-card">
+            <h1>Our Story</h1>
+            <hr>
+            <p>Criter Heaven Crafts is a small business dedicated to creating unique handmade crafts and artisan products. Our passion for crafting and creativity drives us to produce one-of-a-kind jewelry, home decor, and gifts that are crafted with care and attention to detail.</p>
+            <p>Our inspiration comes from the beauty of nature, the joy of creativity, and the desire to bring something special into the lives of our customers. Each piece we create is made with love and a commitment to quality, ensuring that you receive a product that is not only beautiful but also meaningful.</p>
+            <p>Thank you for visiting Criter Heaven Crafts. We hope you find something that brings joy and inspiration into your life!</p>
+        </div>
 
-    <!-- Main Content Sections -->
-    <div class = "card">
-        <h1>About Criter Heaven Crafts</h1>
-        <p>Criter Heaven Crafts is a small business dedicated to creating unique handmade crafts and artisan products. Our passion for crafting and creativity drives us to produce one-of-a-kind jewelry, home decor, and gifts that are crafted with care and attention to detail.</p>
-        <p>Our inspiration comes from the beauty of nature, the joy of creativity, and the desire to bring something special into the lives of our customers. Each piece we create is made with love and a commitment to quality, ensuring that you receive a product that is not only beautiful but also meaningful.</p>
-        <p>Thank you for visiting Criter Heaven Crafts. We hope you find something that brings joy and inspiration into your life!</p>
-    </div>
-
-    <div class = "card">
-        <img src="images/product_placeholder.png" alt="Photo of the Crafter" height="200">
-        <h1>Meet the Crafter</h1>
-        <p>My name is Sandy Andrews, and I am the crafter behind Criter Heaven Crafts. I have always had a passion for creating and a love for handmade items. With years of experience in various crafting techniques, I started Criter Heaven Crafts to share my creations with others and to bring a touch of handmade beauty into the world.</p>
-        <p>When I'm not crafting, you can find me doing agility with my dogs, riding out horses, seeking inspiration for new designs, or spending time with my family. I believe that every piece I create has a story to tell, and I am excited to share those stories with you through my work.</p>
-    </div>
-    
-    <!-- Footer Section - copyright and contact information-->
-    <footer>
-        <p> Forum -  About Us - <a href="mailto:ma17328ma@uri.edu"> Contact Us</a> </p>
-        <p><em>2026 Criter Heaven Crafts. All rights reserved.</em></p>
-    </footer>
-</body>
+        <div class = "card">
+            <h1>Meet the Crafter</h1>
+            <hr>
+            <img src="images/product_placeholder.png" alt="Photo of the Crafter" height="200">
+            <p>My name is Sandy Andrews, and I am the crafter behind Criter Heaven Crafts. I have always had a passion for creating and a love for handmade items. With years of experience in various crafting techniques, I started Criter Heaven Crafts to share my creations with others and to bring a touch of handmade beauty into the world.</p>
+            <p>When I'm not crafting, you can find me doing agility with my dogs, riding out horses, seeking inspiration for new designs, or spending time with my family. I believe that every piece I create has a story to tell, and I am excited to share those stories with you through my work.</p>
+        </div>
+        
+        <!-- Footer Section - copyright and contact information-->
+        <footer>
+            <h1> Critter Haven Crafts</h1>
+            <p>© 2026 All rights reserved. Handmade with love.</p>
+        </footer>
+    </body>
 </html>
