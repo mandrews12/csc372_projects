@@ -1,53 +1,15 @@
 <!-- Meghan Andrews - 2/2/2026 -->
 <!-- This is the products page for Criter Heaven Crafts, showcasing the handmade products with detailed descriptions and purchase options. -->
 <?php
-    // PHP object class for items that will be displayed on the products page, with properties for name, price, description, stock status, and quantity available. 
-    // The class includes methods for purchasing an item and checking stock status.
-    class Item {
-        public string $name;
-        public float $price;
-        public string $description;
-        public bool $stock;
+    require_once './includes/database.php';
 
-        public int $quantity;
-
-        function __construct(string $name, float $price, string $description, bool $stock, int $quantity) {
-            $this->name = $name;
-            $this->price = $price;
-            $this->description = $description;
-            $this->stock = $stock;
-            $this->quantity = $quantity;
-        }
-
-        function purchase() 
-        {
-            if ($this->stock === "In Stock" && $this->quantity > 0) {
-                $this->quantity--;
-                if ($this->quantity === 0) {
-                    $this->stock = false;
-                }
-                return true;
-            }
-            return false;
-        }
-
-        function inStock() {
-            if($this->stock === true && $this->quantity > 0) {
-                return "In Stock";
-            }
-            return "Out of Stock";
-        }
+    function get_all_products(PDO $pdo) {
+        $stmt = pdo($pdo, "SELECT * FROM products");
+        return $stmt->fetchAll();
     }
-
-    $items = [
-        new Item("Assorted Cards", 10.00, "Assorted greeting cards with unique designs.", true, 10),
-        new Item("Papercraft Item", 15.00, "Handmade papercraft items with intricate designs.", true, 5),
-        new Item("Alcohol Ink Flower", 30.00, "Stunning alcohol ink flower artwork on canvas.", true, 3),
-        new Item("Alcohol Ink Tile", 25.00, "Alcohol ink flower designs on decorative tiles.", true, 7),
-        new Item("Shadowbox", 40.00, "Elegant shadowbox displays for your cherished items.", true, 2),
-        new Item("Cardinal Lantern", 25.00, "A beautiful handmade cardinal lantern, perfect for home decor.", true, 4)
-    ];
+    $products = get_all_products($pdo);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -99,11 +61,11 @@
             <h1>Shop</h1>
             <!-- Category Sections -->
              <div id="cards" class="category">
-             <?php foreach ($items as $item) { ?>
-                <div class="item" data-description="<?php echo $item->description; ?>" data-stock="<?php echo $item->inStock(); ?>">
-                    <img src="images/product_placeholder.png" alt="<?php echo $item->name; ?>" height="150">
-                    <h3><?php echo $item->name; ?></h3>
-                    <p>$<?php echo $item->price; ?></p>
+             <?php foreach ($products as $item) { ?>
+                <div class="item" data-description="<?php echo $item['description']; ?>" data-stock="<?php if ($item['in_stock'] == 1) { echo 'In Stock'; } else { echo 'Out of Stock'; } ?>">
+                    <img src="images/product_placeholder.png" alt="<?php echo $item['product_name']; ?>" height="150">
+                    <h3><?php echo $item['product_name']; ?></h3>
+                    <p>$<?php echo $item['price']; ?></p>
                     <button class="view-details">View Details</button>
                 </div>
             <?php } ?>
@@ -126,13 +88,4 @@
             </div>
         </div>
 
-        <!-- Footer Section - copyright and contact information-->
-        <footer>
-            <h1> Critter Haven Crafts</h1>
-            <p>© 2026 All rights reserved. Handmade with love.</p>
-        </footer>
-
-        <script src="js/products.js"></script>
-
-    </body>
-</html>
+        <?php include 'includes/footer.php'; ?>

@@ -1,6 +1,7 @@
 <!-- Meghan Andrews - 2/2/2026 -->
 <?php
     session_start();
+    require_once __DIR__ . '/includes/database.php';
 
     // Handle login form submission
     if (isset($_POST['username'])) {
@@ -9,7 +10,7 @@
         // Store in session
         $_SESSION['username'] = $username;
 
-        // Store in cookie (1 day)
+        // Store in cookie
         setcookie("username", $username, time() + 86400, "/");
 
         // Store last visit cookie
@@ -26,6 +27,12 @@
         header("Location: index.php");
         exit();
     }
+
+    
+
+    // Example query
+    $stmt = $pdo->query("SELECT * FROM users");
+    $users = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -50,16 +57,31 @@
         <!-- LOGIN MODAL -->
         <div id="loginModal" class="login-modal" style="display: none;">
             <div class="login-modal-content">
+                <span class="close" id="close-login-btn"> x </span>
+                <h2>Welcome </h2>
                 <!-- Login View -->
                 <div id="login-view">
-                    <h2>Welcome Back</h2>
                     <form method="POST" action="index.php">
                         <input type="text" name="username" placeholder="User Name" required />
                         <input type="password" name="password" placeholder="Password" />
                         <button type="submit">Login</button>
                     </form>
                 </div>
-            </div> 
+                <!-- Signup View -->
+                <div id="signup-view" style="display: none;">
+                    <form method="POST" action="index.php">
+                        <input type="text" name="username" placeholder="User Name" required />
+                        <input type="text" name="email" placeholder="Your Email" required />
+                        <input type="password" name="password" placeholder="Password" />
+                        <button type="submit">Sign Up</button>
+                    </form>
+                </div>
+                <hr>
+                <div id="loginToggle">
+                    <p id="toggle-text">New User?</p>
+                    <button id="toggle-btn"> Sign Up </button>
+                </div>
+            </div>
         </div>
 
         <!-- Header -->
@@ -179,30 +201,6 @@
             </div>
         </div>
 
-        <!-- Displaying Session Data -->
-         <div class="card">
-            <h2>Visitor Info</h2>
-
-            <?php if (isset($_COOKIE['username'])): ?>
-                <p>User: <?php echo htmlspecialchars($_COOKIE['username']); ?></p>
-            <?php endif; ?>
-
-            <?php if (isset($_COOKIE['lastVisit'])): ?>
-                <p>Last Visit: <?php echo htmlspecialchars($_COOKIE['lastVisit']); ?></p>
-            <?php endif; ?>
-
-            <?php if (isset($_SESSION['username'])): ?>
-                <p>Session User: <?php echo htmlspecialchars($_SESSION['username']); ?></p>
-            <?php endif; ?>
-        </div>
-
-        <!-- Footer Section - copyright and contact information-->
-        <footer>
-            <h1> Critter Haven Crafts</h1>
-            <p>© 2026 All rights reserved. Handmade with love.</p>
-        </footer>
-
         <script src="js/api.js"></script> 
 
-    </body>
-</html>
+        <?php include 'includes/footer.php'; ?>

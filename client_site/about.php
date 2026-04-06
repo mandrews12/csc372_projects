@@ -16,6 +16,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
     <body>
+        <!-- LOGIN MODAL -->
+        <div id="loginModal" class="login-modal" style="display: none;">
+            <div class="login-modal-content">
+                <!-- Login View -->
+                <div id="login-view">
+                    <h2>Welcome Back</h2>
+                    <input type="email"    id="login-email"    placeholder="Email" />
+                    <input type="password" id="login-password" placeholder="Password" />
+                    <p id="login-error" style="color:red; display:none;"></p>
+                    <button onclick="handleLogin()">Login</button>
+                    <p>Don't have an account? <a onclick="showSignupView()">Sign up</a></p>
+                </div>
+
+                <!-- Signup View (hidden by default) -->
+                <div id="signup-view" style="display:none;">
+                    <h2>Create Account</h2>
+                    <input type="text"     id="signup-name"     placeholder="Full Name" />
+                    <input type="email"    id="signup-email"    placeholder="Email" />
+                    <input type="password" id="signup-password" placeholder="Password" />
+                    <p id="signup-error" style="color:red; display:none;"></p>
+                    <button onclick="handleSignup()">Sign Up</button>
+                    <p>Already have an account? <a onclick="showLoginView()">Log in</a></p>
+                </div>
+            </div> 
+        </div>
 
         <!-- Header with Logo and Navigation -->
         <div class="header">
@@ -50,10 +75,4 @@
             <p>When I'm not crafting, you can find me doing agility with my dogs, riding out horses, seeking inspiration for new designs, or spending time with my family. I believe that every piece I create has a story to tell, and I am excited to share those stories with you through my work.</p>
         </div>
         
-        <!-- Footer Section - copyright and contact information-->
-        <footer>
-            <h1> Critter Haven Crafts</h1>
-            <p>© 2026 All rights reserved. Handmade with love.</p>
-        </footer>
-    </body>
-</html>
+        <?php include 'includes/footer.php'; ?>

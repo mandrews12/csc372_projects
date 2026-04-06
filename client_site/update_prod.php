@@ -1,152 +1,259 @@
 <?php
-// Include validation functions
-require_once 'validation.php';
+    // Include validation functions
+    require_once 'validation.php';
+    require_once './includes/database.php';
 
-// Initial values
-$values = [
-    'product_name' => '',
-    'category' => '',
-    'price' => '',
-    'description' => '',
-    'featured' => 0,
-    'stocked' => 0
-];
+    // Initial values
+    $values = [
+        'product_name' => '',
+        'category' => '',
+        'price' => '',
+        'description' => '',
+        'featured' => 0,
+        'stocked' => 0
+    ];
 
-// Error messages
-$errors = [
-    'product_name' => '',
-    'category' => '',
-    'price' => '',
-    'description' => ''
-];
+    // Error messages
+    $errors = [
+        'product_name' => '',
+        'category' => '',
+        'price' => '',
+        'description' => ''
+    ];
 
-$message = "";
+    $message = "";
 
-// Allowed categories
-$allowedCategories = ['cards', 'papercrafts', 'shadowboxes', 'ink-flowers', 'misc'];
+    // Allowed categories
+    $allowedCategories = ['cards', 'papercrafts', 'shadowboxes', 'ink-flowers', 'misc'];
 
-// Check if form submitted
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Check if form submitted
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // Collect data
-    $values['product_name'] = $_POST['product_name'] ?? '';
-    $values['category'] = $_POST['category'] ?? '';
-    $values['price'] = $_POST['price'] ?? '';
-    $values['description'] = $_POST['description'] ?? '';
-    $values['featured'] = isset($_POST['featured']) ? 1 : 0;
-    $values['stocked'] = isset($_POST['stocked']) ? 1 : 0;
+        // Determine the operation
+        $operation = $_POST['op'] ?? '';
 
-    // Validate inputs
-    if (!validateText($values['product_name'], 2, 50)) {
-        $errors['product_name'] = "Product name must be between 2 and 50 characters.";
+        if ($operation === "Add Product") {
+            // Collect data
+            $values['product_name'] = $_POST['product_name'] ?? '';
+            $values['category'] = $_POST['category'] ?? '';
+            $values['price'] = $_POST['price'] ?? '';
+            $values['description'] = $_POST['description'] ?? '';
+            $values['featured'] = isset($_POST['featured']) ? 1 : 0;
+            $values['stocked'] = isset($_POST['stocked']) ? 1 : 0;
+            
+            // Validate inputs
+            if (!validateText($values['product_name'], 2, 50)) {
+                $errors['product_name'] = "Product name must be between 2 and 50 characters.";
+            }
+
+            if (!validateNumber($values['price'], 0, 1000)) {
+                $errors['price'] = "Price must be a number between 0 and 1000.";
+            }
+
+            if (!validateOption($values['category'], $allowedCategories)) {
+                $errors['category'] = "Invalid category selected.";
+            }
+
+            if (!validateText($values['description'], 5, 500)) {
+                $errors['description'] = "Description must be at least 5 characters.";
+            }
+
+            function add_product(PDO $pdo, array $values) {
+                $sql = "INSERT INTO products (product_name, category, price, description, featured, in_stock) 
+                        VALUES (:product_name, :category, :price, :description, :featured, :stocked)";
+                pdo($pdo, $sql, [
+                    ':product_name' => $values['product_name'],
+                    ':category' => $values['category'],
+                    ':price' => $values['price'],
+                    ':description' => $values['description'],
+                    ':featured' => $values['featured'],
+                    ':stocked' => $values['stocked']
+                ]);
+            }
+
+            // Check if form is valid
+            if (implode("", $errors) === "") {
+                add_product($pdo, $values);
+                $message = "Product added successfully!";
+            } else {
+                $message = "Please fix the errors below.";
+            }
+
+        } else if ($operation === "Update Product") {
+            // Placeholder for update logic
+            $message = "Update functionality coming soon!";
+        } else if ($operation === "Delete Product") {
+            // Placeholder for delete logic
+            $values['product_id'] = $_POST['product_id'] ?? '';
+
+            function delete_product(PDO $pdo, int $product_id) {
+                $sql = "DELETE FROM products WHERE id = :id";
+                pdo($pdo, $sql, [':id' => $product_id]);
+            }
+
+            delete_product($pdo, $values['product_id']);
+            $message = "Product deleted successfully!";
+        }
+
+    function get_all_products(PDO $pdo) {
+        $sql = "SELECT id, product_name FROM products";
+        return pdo($pdo, $sql)->fetchAll();
     }
 
-    if (!validateNumber($values['price'], 0, 1000)) {
-        $errors['price'] = "Price must be a number between 0 and 1000.";
+    $products = get_all_products($pdo);
     }
-
-    if (!validateOption($values['category'], $allowedCategories)) {
-        $errors['category'] = "Invalid category selected.";
-    }
-
-    if (!validateText($values['description'], 5, 500)) {
-        $errors['description'] = "Description must be at least 5 characters.";
-    }
-
-    // Check if form is valid
-    if (implode("", $errors) === "") {
-        $message = "Product added successfully!";
-    } else {
-        $message = "Please fix the errors below.";
-    }
-}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Update Products</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Update Products</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
 
-<body>
-     <!-- Header with Logo and Navigation -->
-    <div class="header">
-        <img src="documentation/logo.png" alt="Criter Heaven Crafts Logo" height="200">
-        <nav>
-            <a href="index.php">Home</a>
-            <a href="about.php" >About</a> 
-            <a href="products.php">Gallery</a>
-            <a href="contact.php">Contact</a>
-            <a href="update_prod.php" class="active">Update Products</a>
-        </nav>
-    </div>
+    <body>
+        <!-- LOGIN MODAL -->
+            <div id="loginModal" class="login-modal" style="display: none;">
+                <div class="login-modal-content">
+                    <!-- Login View -->
+                    <div id="login-view">
+                        <h2>Welcome Back</h2>
+                        <input type="email"    id="login-email"    placeholder="Email" />
+                        <input type="password" id="login-password" placeholder="Password" />
+                        <p id="login-error" style="color:red; display:none;"></p>
+                        <button onclick="handleLogin()">Login</button>
+                        <p>Don't have an account? <a onclick="showSignupView()">Sign up</a></p>
+                    </div>
 
-    <div class = "header-card">
-        <h1>Our Shop</h1>
-    </div>
+                    <!-- Signup View (hidden by default) -->
+                    <div id="signup-view" style="display:none;">
+                        <h2>Create Account</h2>
+                        <input type="text"     id="signup-name"     placeholder="Full Name" />
+                        <input type="email"    id="signup-email"    placeholder="Email" />
+                        <input type="password" id="signup-password" placeholder="Password" />
+                        <p id="signup-error" style="color:red; display:none;"></p>
+                        <button onclick="handleSignup()">Sign Up</button>
+                        <p>Already have an account? <a onclick="showLoginView()">Log in</a></p>
+                    </div>
+                </div> 
+            </div>
 
-    <div class="card" id="filters">
-        <h1>Filter by Category</h1>
-        <hr>
-        <div class="cat-options">
-            <button class="cat-btn" category="add"> Add New Item</button>
-            <button class="cat-btn" data-category="update">Update Item</button>
-            <button class="cat-btn" data-category="delete">Delete Item</button>
+        <!-- Header with Logo and Navigation -->
+        <div class="header">
+            <img src="documentation/logo.png" alt="Criter Heaven Crafts Logo" height="200">
+            <nav>
+                <a href="index.php">Home</a>
+                <a href="about.php" >About</a> 
+                <a href="products.php">Gallery</a>
+                <a href="contact.php">Contact</a>
+                <a href="update_prod.php" class="active">Update Products</a>
+            </nav>
         </div>
-    </div>
 
-    <div class="card">
-        <h2>Add a New Product</h2>
+        <div class = "header-card">
+            <h1>Our Shop</h1>
+        </div>
 
-        <!-- Message -->
-        <?php if ($message): ?>
-            <p><?= htmlspecialchars($message) ?></p>
-        <?php endif; ?>
+        <div class="card" id="filters">
+            <h1>Filter by Category</h1>
+            <hr>
+            <div class="cat-options">
+                <button class="cat-btn" id="add-btn" data-category="add"> Add New Item</button>
+                <button class="cat-btn" id="update-btn" data-category="update">Update Item</button>
+                <button class="cat-btn" id="delete-btn" data-category="delete">Delete Item</button>
+            </div>
+        </div>
 
-        <form method="POST" action="update_prod.php">
+        <div class="card" style="display: block;" id="add-section">
+            <h2>Add a New Product</h2>
 
-            <!-- Product Name -->
-            <label>Product Name</label>
-            <input type="text" name="product_name"
-                value="<?= htmlspecialchars($values['product_name']) ?>">
-            <p class="error"><?= $errors['product_name'] ?></p>
+            <!-- Message -->
+            <?php if ($message): ?>
+                <p><?= htmlspecialchars($message) ?></p>
+            <?php endif; ?>
+            
+            <!-- Add New Product Form -->
+            <form method="POST" action="update_prod.php">
 
-            <!-- Category -->
-            <label>Category</label>
-            <select name="category">
-                <?php foreach ($allowedCategories as $cat): ?>
-                    <option value="<?= $cat ?>"
-                        <?= ($values['category'] === $cat) ? 'selected' : '' ?>>
-                        <?= $cat ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-            <p class="error"><?= $errors['category'] ?></p>
+                <!-- Product Name -->
+                <label>Product Name</label>
+                <input type="text" name="product_name"
+                    value="<?= htmlspecialchars($values['product_name']) ?>">
+                <p class="error"><?= $errors['product_name'] ?></p>
 
-            <!-- Price -->
-            <label>Price</label>
-            <input type="number" name="price" step="0.01"
-                value="<?= htmlspecialchars($values['price']) ?>">
-            <p class="error"><?= $errors['price'] ?></p>
+                <!-- Category -->
+                <label>Category</label>
+                <select name="category">
+                    <?php foreach ($allowedCategories as $cat): ?>
+                        <option value="<?= $cat ?>"
+                            <?= ($values['category'] === $cat) ? 'selected' : '' ?>>
+                            <?= $cat ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <p class="error"><?= $errors['category'] ?></p>
 
-            <!-- Description -->
-            <label>Description</label>
-            <textarea name="description"><?= htmlspecialchars($values['description']) ?></textarea>
-            <p class="error"><?= $errors['description'] ?></p>
+                <!-- Price -->
+                <label>Price</label>
+                <input type="number" name="price" step="0.01"
+                    value="<?= htmlspecialchars($values['price']) ?>">
+                <p class="error"><?= $errors['price'] ?></p>
 
-            <!-- Checkboxes -->
-            <label>Featured </label>
-                <input type="checkbox" name="featured" <?= $values['featured'] ? 'checked' : '' ?>>
+                <!-- Description -->
+                <label>Description</label>
+                <textarea name="description"><?= htmlspecialchars($values['description']) ?></textarea>
+                <p class="error"><?= $errors['description'] ?></p>
 
-            <label>In Stock</label>
-                <input type="checkbox" name="stocked" <?= $values['stocked'] ? 'checked' : '' ?>>
-                
-            <input type="submit" value="Add Product">
+                <!-- Checkboxes -->
+                <label>Featured </label>
+                    <input type="checkbox" name="featured" <?= $values['featured'] ? 'checked' : '' ?>>
 
-        </form>
-    </div>
+                <label>In Stock</label>
+                    <input type="checkbox" name="stocked" <?= $values['stocked'] ? 'checked' : '' ?>>
+                    
+                <input type="submit" name="op" value="Add Product">
 
-</body>
+            </form>
+        </div>
+
+        <div class="card" style="display:none;" id="update-section">
+            <h2>Update Existing Product</h2>
+
+            <!-- Update Product Form -->
+            <form method="POST" action="update_prod.php">
+                <label>Select Product to Update</label>
+                <select name="product_id">
+                    <?php foreach ($products as $product): ?>
+                        <option value="<?= $product['id'] ?>">
+                            <?= $product['product_name'] ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <input type="submit" name = "op" value="Update Product">
+            </form>
+
+        </div>
+
+        <div class="card" style="display:none;" id="delete-section">
+            <h2>Delete Existing Product</h2>
+
+            <!-- Delete Product Form -->
+            <form method="POST" action="update_prod.php">
+                <label>Select Product to Delete</label>
+                <select name="product_id">
+                    <?php foreach ($products as $product): ?>
+                        <option value="<?= $product['id'] ?>">
+                            <?= $product['product_name'] ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <input type="submit" name = "op" value="Delete Product">
+            </form>
+
+        </div>
+
+        <script src="js/update.js"></script>
+
+    </body>
 </html>
