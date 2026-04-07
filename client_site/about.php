@@ -1,58 +1,16 @@
+<!DOCTYPE html>
 <!-- Meghan Andrews - 2/2/2026 -->
-<!-- This is the about page for Criter Heaven Crafts, providing information about the crafter and the inspiration behind the handmade products -->
+<!-- This is the about page for Critter Haven Crafts, providing information about the crafter and the inspiration behind the handmade products -->
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Criter Heaven Crafts - Unique handmade crafts and artisan products. Discover one-of-a-kind jewelry, home decor, and gifts crafted with care.">
-    <meta property="og:title" content="Criter Heaven Crafts - Handmade Artisan Products">
-    <meta property="og:description" content="Explore unique handmade crafts and artisan products at Criter Heaven Crafts. From jewelry to home decor, find the perfect gift crafted with love.">
-    <meta property="og:image" content="documentation/logo.png">
-    <meta property="og:url" content="https://criterheavencrafts.com">
-    <meta property="og:type" content="website">
-
-    <title>Criter Heaven Crafts</title> 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+<?php
+$pageTitle = 'About | Critter Haven Crafts';
+$ogTitle = 'Critter Haven Crafts - Handmade Artisan Products';
+$activePage = 'about';
+include 'includes/head.php';
+?>
     <body>
-        <!-- LOGIN MODAL -->
-        <div id="loginModal" class="login-modal" style="display: none;">
-            <div class="login-modal-content">
-                <!-- Login View -->
-                <div id="login-view">
-                    <h2>Welcome Back</h2>
-                    <input type="email"    id="login-email"    placeholder="Email" />
-                    <input type="password" id="login-password" placeholder="Password" />
-                    <p id="login-error" style="color:red; display:none;"></p>
-                    <button onclick="handleLogin()">Login</button>
-                    <p>Don't have an account? <a onclick="showSignupView()">Sign up</a></p>
-                </div>
-
-                <!-- Signup View (hidden by default) -->
-                <div id="signup-view" style="display:none;">
-                    <h2>Create Account</h2>
-                    <input type="text"     id="signup-name"     placeholder="Full Name" />
-                    <input type="email"    id="signup-email"    placeholder="Email" />
-                    <input type="password" id="signup-password" placeholder="Password" />
-                    <p id="signup-error" style="color:red; display:none;"></p>
-                    <button onclick="handleSignup()">Sign Up</button>
-                    <p>Already have an account? <a onclick="showLoginView()">Log in</a></p>
-                </div>
-            </div> 
-        </div>
-
-        <!-- Header with Logo and Navigation -->
-        <div class="header">
-            <img src="documentation/logo.png" alt="Criter Heaven Crafts Logo" height="200">
-            <nav>
-                <a href="index.php">Home</a>
-                <a href="about.php" class="active">About</a> 
-                <a href="products.php">Gallery</a>
-                <a href="contact.php">Contact</a>
-                <a href="update_prod.php" >Update Products</a>
-            </nav>
-        </div>
+        <?php include 'includes/login_modal.php'; ?>
+        <?php include 'includes/header.php'; ?>
 
         <div class = "header-card">
             <h1>About Us</h1>
@@ -62,16 +20,16 @@
         <div class = "left-card">
             <h1>Our Story</h1>
             <hr>
-            <p>Criter Heaven Crafts is a small business dedicated to creating unique handmade crafts and artisan products. Our passion for crafting and creativity drives us to produce one-of-a-kind jewelry, home decor, and gifts that are crafted with care and attention to detail.</p>
+            <p>Critter Haven Crafts is a small business dedicated to creating unique handmade crafts and artisan products. Our passion for crafting and creativity drives us to produce one-of-a-kind jewelry, home decor, and gifts that are crafted with care and attention to detail.</p>
             <p>Our inspiration comes from the beauty of nature, the joy of creativity, and the desire to bring something special into the lives of our customers. Each piece we create is made with love and a commitment to quality, ensuring that you receive a product that is not only beautiful but also meaningful.</p>
-            <p>Thank you for visiting Criter Heaven Crafts. We hope you find something that brings joy and inspiration into your life!</p>
+            <p>Thank you for visiting Critter Haven Crafts. We hope you find something that brings joy and inspiration into your life!</p>
         </div>
 
         <div class = "card">
             <h1>Meet the Crafter</h1>
             <hr>
             <img src="images/product_placeholder.png" alt="Photo of the Crafter" height="200">
-            <p>My name is Sandy Andrews, and I am the crafter behind Criter Heaven Crafts. I have always had a passion for creating and a love for handmade items. With years of experience in various crafting techniques, I started Criter Heaven Crafts to share my creations with others and to bring a touch of handmade beauty into the world.</p>
+            <p>My name is Sandy Andrews, and I am the crafter behind Critter Haven Crafts. I have always had a passion for creating and a love for handmade items. With years of experience in various crafting techniques, I started Critter Haven Crafts to share my creations with others and to bring a touch of handmade beauty into the world.</p>
             <p>When I'm not crafting, you can find me doing agility with my dogs, riding out horses, seeking inspiration for new designs, or spending time with my family. I believe that every piece I create has a story to tell, and I am excited to share those stories with you through my work.</p>
         </div>
         

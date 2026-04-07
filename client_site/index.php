@@ -37,21 +37,11 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Criter Heaven Crafts - Unique handmade crafts and artisan products. Discover one-of-a-kind jewelry, home decor, and gifts crafted with care.">
-    <meta property="og:title" content="Criter Heaven Crafts - Handmade Artisan Products">
-    <meta property="og:description" content="Explore unique handmade crafts and artisan products at Criter Heaven Crafts. From jewelry to home decor, find the perfect gift crafted with love.">
-    <meta property="og:image" content="documentation/logo.png">
-    <meta property="og:url" content="https://criterheavencrafts.com">
-    <meta property="og:type" content="website">
-
-    <title>Criter Heaven Crafts</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-</head>
+<?php
+$pageTitle = 'Home | Critter Haven Crafts';
+$activePage = 'home';
+include 'includes/head.php';
+?>
 
     <body>
         <!-- LOGIN MODAL -->
@@ -84,31 +74,7 @@
             </div>
         </div>
 
-        <!-- Header -->
-        <div class="header">
-            <img src="documentation/logo.png" alt="Criter Heaven Crafts Logo" height="200">
-            <nav>
-                <a href="index.php" class="active">Home</a>
-                <a href="about.php">About</a> 
-                <a href="products.php">Shop</a>
-                <a href="contact.php">Contact</a>
-                <a href="update_prod.php" >Update Products</a>
-                
-                 <!-- Login button — swapped for username after login -->
-                <?php if (isset($_SESSION['username'])): ?>
-                    <div id="user-info">
-                        <span>
-                            Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>
-                        </span>
-                        <a href="index.php?logout=true">Logout</a>
-                    </div>
-                <?php else: ?>
-                    <button id="nav-login-btn">
-                        <i class="fa-solid fa-right-to-bracket"></i> Login
-                    </button>
-                <?php endif; ?>
-            </nav>
-        </div>
+        <?php include 'includes/header.php'; ?>
 
         <!-- Main Content Sections -->
         <div class = "header-card" id="welcome-card">
@@ -123,7 +89,7 @@
             <div class="about-content">
                 <h1>Our Story</h1>
                 <hr>
-                <p>Criter Heaven Crafts creates handmade, one-of-a-kind pieces designed to bring warmth, creativity, and personality into everyday life. Each item is thoughtfully crafted with care and attention to detail, offering unique gifts and décor you won’t find in mass-produced stores.   </p>
+                <p>Critter Haven Crafts creates handmade, one-of-a-kind pieces designed to bring warmth, creativity, and personality into everyday life. Each item is thoughtfully crafted with care and attention to detail, offering unique gifts and décor you won’t find in mass-produced stores.   </p>
                 <button onclick="location.href='about.html'">Learn More</button>
             </div>
         </div>
@@ -165,7 +131,7 @@
             </div>
         </div>
 
-        <!-- A section highlighting the benefits of shopping with Criter Heaven Crafts -->
+        <!-- A section highlighting the benefits of shopping with Critter Haven Crafts -->
         <div class="card" id="benefits">
             <h1>Why Choose Us</h1>
             <hr>

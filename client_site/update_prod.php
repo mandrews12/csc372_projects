@@ -40,6 +40,7 @@
             $values['description'] = $_POST['description'] ?? '';
             $values['featured'] = isset($_POST['featured']) ? 1 : 0;
             $values['stocked'] = isset($_POST['stocked']) ? 1 : 0;
+            $values['created_date'] = $_POST['created_date'] ?? '';
             
             // Validate inputs
             if (!validateText($values['product_name'], 2, 50)) {
@@ -59,15 +60,16 @@
             }
 
             function add_product(PDO $pdo, array $values) {
-                $sql = "INSERT INTO products (product_name, category, price, description, featured, in_stock) 
-                        VALUES (:product_name, :category, :price, :description, :featured, :stocked)";
+                $sql = "INSERT INTO products (product_name, category, price, description, featured, in_stock, created_date) 
+                        VALUES (:product_name, :category, :price, :description, :featured, :stocked, :created_date)";
                 pdo($pdo, $sql, [
                     ':product_name' => $values['product_name'],
                     ':category' => $values['category'],
                     ':price' => $values['price'],
                     ':description' => $values['description'],
                     ':featured' => $values['featured'],
-                    ':stocked' => $values['stocked']
+                    ':stocked' => $values['stocked'],
+                    ':created_date' => $values['created_date']
                 ]);
             }
 
@@ -106,50 +108,16 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Update Products</title>
-        <link rel="stylesheet" href="css/style.css">
-    </head>
+<?php
+$pageTitle = 'Update Products | Critter Haven Crafts';
+$activePage = 'update';
+include 'includes/head.php';
+?>
 
     <body>
-        <!-- LOGIN MODAL -->
-            <div id="loginModal" class="login-modal" style="display: none;">
-                <div class="login-modal-content">
-                    <!-- Login View -->
-                    <div id="login-view">
-                        <h2>Welcome Back</h2>
-                        <input type="email"    id="login-email"    placeholder="Email" />
-                        <input type="password" id="login-password" placeholder="Password" />
-                        <p id="login-error" style="color:red; display:none;"></p>
-                        <button onclick="handleLogin()">Login</button>
-                        <p>Don't have an account? <a onclick="showSignupView()">Sign up</a></p>
-                    </div>
+        <?php include 'includes/login_modal.php'; ?>
 
-                    <!-- Signup View (hidden by default) -->
-                    <div id="signup-view" style="display:none;">
-                        <h2>Create Account</h2>
-                        <input type="text"     id="signup-name"     placeholder="Full Name" />
-                        <input type="email"    id="signup-email"    placeholder="Email" />
-                        <input type="password" id="signup-password" placeholder="Password" />
-                        <p id="signup-error" style="color:red; display:none;"></p>
-                        <button onclick="handleSignup()">Sign Up</button>
-                        <p>Already have an account? <a onclick="showLoginView()">Log in</a></p>
-                    </div>
-                </div> 
-            </div>
-
-        <!-- Header with Logo and Navigation -->
-        <div class="header">
-            <img src="documentation/logo.png" alt="Criter Heaven Crafts Logo" height="200">
-            <nav>
-                <a href="index.php">Home</a>
-                <a href="about.php" >About</a> 
-                <a href="products.php">Gallery</a>
-                <a href="contact.php">Contact</a>
-                <a href="update_prod.php" class="active">Update Products</a>
-            </nav>
-        </div>
+        <?php include 'includes/header.php'; ?>
 
         <div class = "header-card">
             <h1>Our Shop</h1>
@@ -211,6 +179,10 @@
 
                 <label>In Stock</label>
                     <input type="checkbox" name="stocked" <?= $values['stocked'] ? 'checked' : '' ?>>
+
+                <!-- Date product was created -->
+                 <label>Created Date</label>
+                    <input type="date" name="created_date" id = "created_date">
                     
                 <input type="submit" name="op" value="Add Product">
 

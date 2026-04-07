@@ -1,10 +1,10 @@
 <!-- Meghan Andrews - 2/2/2026 -->
-<!-- This is the products page for Criter Heaven Crafts, showcasing the handmade products with detailed descriptions and purchase options. -->
+<!-- This is the products page for Critter Haven Crafts, showcasing the handmade products with detailed descriptions and purchase options. -->
 <?php
     require_once './includes/database.php';
 
     function get_all_products(PDO $pdo) {
-        $stmt = pdo($pdo, "SELECT * FROM products");
+        $stmt = pdo($pdo, "SELECT * FROM products ORDER BY created_date DESC");
         return $stmt->fetchAll();
     }
     $products = get_all_products($pdo);
@@ -12,35 +12,18 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="Criter Heaven Crafts - Unique handmade crafts and artisan products. Discover one-of-a-kind jewelry, home decor, and gifts crafted with care.">
-        <meta property="og:title" content="Criter Heaven Crafts - Gallery">
-        <meta property="og:description" content="Explore unique handmade crafts and artisan products at Criter Heaven Crafts. From jewelry to home decor, find the perfect gift crafted with love.">
-        <meta property="og:image" content="documentation/logo.png">
-        <meta property="og:url" content="https://criterheavencrafts.com/products.html">
-        <meta property="og:type" content="website">
-
-        <title>Criter Heaven Crafts - Shop</title> 
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    </head>
+<?php
+$pageTitle = 'Shop | Critter Haven Crafts';
+$ogTitle = 'Critter Haven Crafts - Gallery';
+$ogUrl = 'https://CritterHavencrafts.com/products.html';
+$activePage = 'products';
+include 'includes/head.php';
+?>
 
 
     <body>
 
-        <!-- Header with Logo and Navigation -->
-        <div class="header">
-            <img src="documentation/logo.png" alt="Criter Heaven Crafts Logo" height="200">
-            <nav>
-                <a href="index.php">Home</a>
-                <a href="about.php">About</a> 
-                <a href="products.php" class="active">Shop</a>
-                <a href="contact.php">Contact</a>
-                <a href="update_prod.php" >Update Products</a>
-            </nav>
-        </div>
+        <?php include 'includes/header.php'; ?>
 
         <div class = "header-card">
             <h1>Our Shop</h1>

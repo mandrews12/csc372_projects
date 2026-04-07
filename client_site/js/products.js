@@ -1,7 +1,7 @@
 /*  =====================================
     Meghan Andrews - 2/2/2026
 
-    This file contains the JavaScript code for the products page of Criter Heaven Crafts and handles category navigation, 
+    This file contains the JavaScript code for the products page of Critter Haven Crafts and handles category navigation, 
     product detail modals, and interactions with the "Buy Now" and "Contact Seller" buttons.  The code ensures a smooth user 
     experience by dynamically updating the content based on user actions and providing feedback through alerts and modal displays.
     ====================================== */
