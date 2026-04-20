@@ -1,30 +1,74 @@
 /*  =====================================
     Meghan Andrews - 2/2/2026
-    Criter Heaven Crafts - Style Sheet
+    Critter Haven Crafts - Style Sheet
     ===================================== */
 
-/* Global */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #E8F4FD; 
-    color: #2C3E50;
+/* ---- Global ---- */
+:root {
+    --primary-color: #4090d6;
+    --primary-foreground: #FFFFFF;
+    --secondary-color: #f0f6ff;
+    --secondary-foreground: #1f2937;
+    --red-color: #ef4343;
+    --muted-color: #f1f5f9;
+    --muted-foreground: #65758b;
+    --accent-color: #f59f0a;
+    --warm-color: #fff7f0;
+    font-family: 'Serif', 'serif';
+    font-size: 1.5em;
 }
 
-/* Header & Navigation */
+/* ---- Typography ---- */
+h1, h2, h3 {
+    color: var(--secondary-foreground);
+}
+
+.error {
+    color: #ef4343;
+}
+
+p {
+    color: var(--muted-foreground);
+    font-weight: 300;
+}
+
+hr {
+    border: none;
+    border-top: 3px solid var(--primary-color);
+    width: 20%;
+    margin: 20px auto;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/* ---- Header & Navigation ---- */
 .header {
-    background: #4090d6;
+    background: var(--primary-foreground);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 30px;
-    font-size: 20px;
-    box-shadow: 0 4px 10px rgba(64, 144, 214, 0.3);
     position: sticky;
     top: 0;
 }
+/* ---- Nav Login Button ---- */
+#nav-login-btn {
+    margin-top: 0;
+    padding: 8px 20px;
+    font-size: .75em;
+    margin-left: 20px;
+}
 
+#nav-login-btn i {
+    margin-right: 5px;
+}
 .header img {
-    max-height: 100px;
+    max-height: 125px;
     border-radius: 8px;
 }
 
@@ -34,71 +78,142 @@ nav {
 }
 
 nav a {
-    color: #FFFFFF;
+    color: var(--secondary-foreground);
     text-decoration: none;
     margin-left: 20px;
     font-weight: 500;
-    padding: 10px 10px;
-    border-radius: 6px;
+    padding: 10px;
+    font-size: 1.1em;
 }
 
 nav a:hover {
-    font-weight: bold;
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-nav a.active {
-    background-color: rgba(255, 255, 255, 0.3);
-    font-weight: bold;
+    color: var(--primary-color);
 }
 
-/* Card Layout */
-.card {
-    background-color: #F0F8FF;
-    margin: 30px auto;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(64, 144, 214, 0.2);
+/* ---- Cards ---- */
+#welcome-card {
+    height: 600px;
+}
+
+.header-card {
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../documentation/ai-generated-craft-shop-advertisment-background-with-copy-space-free-photo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: .9;
+    gap: 12px;
     text-align: center;
+}
+
+.header-card h1 {
+    color: var(--primary-foreground);
+    font-weight: bold;
+    font-size: 3.5em;
+}
+
+#welcome-card p {
+    color: var(--accent-color);
+    font-weight: thin;
+    letter-spacing: 0.3em;
+}
+
+#welcome-card h3 {
+    color: var(--primary-foreground);
+    font-weight: 50;
+}
+
+.card {
+    text-align: center;
+    padding: 96px 16px;
+}
+
+.left-card {
+    padding: 20px 40px;
+}
+
+/* Section-specific card backgrounds and sizing */
+#benefits {
+    background-color: var(--muted-color);
+    font-size: 1.3em;
 }
 
 #benefits p {
     text-align: left;
 }
 
-/* Headings */
-h1, h2, h3 {
-    color: #2E5C8A; 
-    font-weight: 600;
+#about {
+    background-color: var(--warm-color);
+    font-size: 1.3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-h1 {
-    text-align: center;
-    font-size: 2.5em;
+#featured {
+    background-color: var(--primary-foreground);
+    font-size: 1.3em;
 }
 
-h2 {
-    margin-bottom: 15px;
-    font-size: 1.8em;
+/* ---- Benefits Grid ---- */
+.benefit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 24px;
+    text-align: left;
 }
 
-/* Buttons */
-button {
-    background-color: #4090d6;
-    color: #FFFFFF;
+.benefit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+.benefit i {
+    color: var(--primary-foreground);
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    padding: 16px;
+}
+
+/* ---- About Section ---- */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75%;
+    line-height: 1.5;
+}
+
+/* ---- Buttons ---- */
+button, form input[type="submit"] {
+    background-color: var(--primary-color);
+    color: var(--primary-foreground);
     border: none;
-    padding: 14px 28px;
-    font-size: 16px;
-    border-radius: 8px;
+    padding: 12px 40px;
+    border-radius: 50px;
     cursor: pointer;
     font-weight: 500;
+    font-family: 'Serif', 'serif';
+    font-size: .9em;
+    margin-top: 40px;
 }
 
-button:hover {
+button:hover, form input[type="submit"]:hover {
     background-color: #3070B0;
 }
 
-/* Featured Items */
+.cat-btn {
+    margin: 20px 20px;
+}
+
+/* ---- Featured Items ---- */
 .featured-items {
     display: flex;
     justify-content: center;
@@ -106,7 +221,7 @@ button:hover {
     flex-wrap: wrap;
 }
 
-/* Product Grid */
+/* ---- Product Grid ---- */
 #cards {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -127,7 +242,6 @@ button:hover {
 }
 
 .item {
-    background-color: #E0F0FF;
     border-radius: 8px;
     padding: 20px;
     text-align: center;
@@ -138,44 +252,81 @@ button:hover {
     box-shadow: 0 8px 20px rgba(64, 144, 214, 0.3);
 }
 
-.item img {
-    border-radius: 5px;
-}
-
+/* Scoped to img inside .item to avoid interfering with other hover states */
 .item img:hover {
     transform: scale(1.05);
     transition: transform 0.3s;
 }
 
 .item p {
-    color: #34495E;
+    color: var(--primary-color);
     font-weight: 500;
 }
 
-/* Lists */
-ul {
-    padding-left: 20px;
-}
-
-li {
-    margin-bottom: 10px;
-}
-
-/* Footer */
+/* ---- Footer ---- */
 footer {
-    background-color: #2E5C8A;
-    color: #FFFFFF;
+    background-color: var(--secondary-foreground);
+    color: var(--primary-foreground);
     text-align: center;
     padding: 25px;
-    margin-top: 40px;
 }
 
-footer a {
-    color: #C8A96A;
-    text-decoration: none;
+footer h1 {
+    color: var(--primary-foreground);  /* white */
 }
 
-/* Modal Styles */
+/* ---- Forms ---- */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    margin: 0 auto;
+    line-height: 2;
+}
+
+#contact-form {
+    font-size: 1.1em;
+}
+
+form input[type="text"],
+form input[type="number"],
+form select,
+form input[type="email"],
+form input[type="password"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    height: 25px;
+    font-family: 'Serif', 'serif';
+    font-size: 1em;
+    color: var(--secondary-foreground);
+}
+form select {
+    height: auto;
+}
+form textarea {
+    height: 100px;
+}
+form input[type="checkbox"]{
+    transform: scale(1.5);
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="number"]:focus,
+form input[type="checkbox"]:focus,
+form input[type="password"]:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+    border: 3px solid var(--primary-color);
+}
+
+/* ---- Modals ---- */
 .modal {
     display: none;
     position: fixed;
@@ -191,7 +342,7 @@ footer a {
     background-color: #F0F8FF;
     margin: 5% auto;
     padding: 30px;
-    border: 1px solid #4090d6;
+    border: 1px solid var(--primary-color);
     width: 70%;
     border-radius: 12px;
     display: flex;
@@ -206,6 +357,7 @@ footer a {
     height: auto;
     border-radius: 5px;
 }
+
 
 .modal-content .text-content h2 {
     margin-bottom: 10px;
@@ -226,7 +378,6 @@ footer a {
 .close {
     color: #aaa;
     float: right;
-    font-size: 28px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -235,9 +386,9 @@ footer a {
     color: black;
 }
 
-/* Login Modal */
+/* ---- Login Modal ---- */
 .login-modal {
-    display: flex;
+    display: none;
     position: fixed;
     z-index: 9999;
     left: 0;
@@ -274,7 +425,8 @@ footer a {
     align-items: center;
     margin-left: 25px;
 }
-/* -- Responsive Design -- */
+
+/* ---- Responsive Design ---- */
 @media only screen and (max-width: 600px) {
     .item {
         flex: 0 1 100%;
@@ -285,11 +437,7 @@ footer a {
         text-align: center;
     }
 
-    h1 {
-        font-size: 2em;
-    }
-
-    h2 {
-        font-size: 1.5em;
+    .benefit-grid {
+        grid-template-columns: 1fr;
     }
 }
