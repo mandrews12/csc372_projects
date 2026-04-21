@@ -1,111 +1,443 @@
+/*  =====================================
+    Meghan Andrews - 2/2/2026
+    Critter Haven Crafts - Style Sheet
+    ===================================== */
+
+/* ---- Global ---- */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+    --primary-color: #4090d6;
+    --primary-foreground: #FFFFFF;
+    --secondary-color: #f0f6ff;
+    --secondary-foreground: #1f2937;
+    --red-color: #ef4343;
+    --muted-color: #f1f5f9;
+    --muted-foreground: #65758b;
+    --accent-color: #f59f0a;
+    --warm-color: #fff7f0;
+    font-family: 'Serif', 'serif';
+    font-size: 1.5em;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+/* ---- Typography ---- */
+h1, h2, h3 {
+    color: var(--secondary-foreground);
 }
 
-body {
-  margin: 0;
+.error {
+    color: #ef4343;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
 p {
-  margin: 0;
+    color: var(--muted-foreground);
+    font-weight: 300;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+hr {
+    border: none;
+    border-top: 3px solid var(--primary-color);
+    width: 20%;
+    margin: 20px auto;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/* ---- Header & Navigation ---- */
+.header {
+    background: var(--primary-foreground);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+}
+/* ---- Nav Login Button ---- */
+#nav-login-btn {
+    margin-top: 0;
+    padding: 8px 20px;
+    font-size: .75em;
+    margin-left: 20px;
+}
+
+#nav-login-btn i {
+    margin-right: 5px;
+}
+.header img {
+    max-height: 125px;
+    border-radius: 8px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: var(--secondary-foreground);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+/* ---- Cards ---- */
+#welcome-card {
+    height: 600px;
+}
+
+.header-card {
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/ai-generated-craft-shop-advertisment-background-with-copy-space-free-photo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: .9;
+    gap: 12px;
+    text-align: center;
+}
+
+.header-card h1 {
+    color: var(--primary-foreground);
+    font-weight: bold;
+    font-size: 3.5em;
+}
+
+#welcome-card p {
+    color: var(--accent-color);
+    font-weight: thin;
+    letter-spacing: 0.3em;
+}
+
+#welcome-card h3 {
+    color: var(--primary-foreground);
+    font-weight: 50;
+}
+
+.card {
+    text-align: center;
+    padding: 96px 16px;
+}
+
+.left-card {
+    padding: 20px 40px;
+}
+
+/* Section-specific card backgrounds and sizing */
+#benefits {
+    background-color: var(--muted-color);
+    font-size: 1.3em;
+}
+
+#benefits p {
+    text-align: left;
+}
+
+#about {
+    background-color: var(--warm-color);
+    font-size: 1.3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#featured {
+    background-color: var(--primary-foreground);
+    font-size: 1.3em;
+}
+
+/* ---- Benefits Grid ---- */
+.benefit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 24px;
+    text-align: left;
+}
+
+.benefit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+.benefit i {
+    color: var(--primary-foreground);
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    padding: 16px;
+}
+
+/* ---- About Section ---- */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75%;
+    line-height: 1.5;
+}
+
+/* ---- Buttons ---- */
+button, form input[type="submit"] {
+    background-color: var(--primary-color);
+    color: var(--primary-foreground);
+    border: none;
+    padding: 12px 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: 'Serif', 'serif';
+    font-size: .9em;
+    margin-top: 40px;
+}
+
+button:hover, form input[type="submit"]:hover {
+    background-color: #3070B0;
+}
+
+.cat-btn {
+    margin: 20px 20px;
+}
+
+/* ---- Featured Items ---- */
+.featured-items {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* ---- Product Grid ---- */
+#cards {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+    align-items: start;
+}
+
+#cards .item {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+#cards .item img {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+}
+
+.item {
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(64, 144, 214, 0.3);
+}
+
+/* Scoped to img inside .item to avoid interfering with other hover states */
+.item img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+}
+
+.item p {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* ---- Footer ---- */
+footer {
+    background-color: var(--secondary-foreground);
+    color: var(--primary-foreground);
+    text-align: center;
+    padding: 25px;
+}
+
+footer h1 {
+    color: var(--primary-foreground);  /* white */
+}
+
+/* ---- Forms ---- */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    margin: 0 auto;
+    line-height: 2;
+}
+
+#contact-form {
+    font-size: 1.1em;
+}
+
+form input[type="text"],
+form input[type="number"],
+form select,
+form input[type="email"],
+form input[type="password"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    height: 25px;
+    font-family: 'Serif', 'serif';
+    font-size: 1em;
+    color: var(--secondary-foreground);
+}
+form select {
+    height: auto;
+}
+form textarea {
+    height: 100px;
+}
+form input[type="checkbox"]{
+    transform: scale(1.5);
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="number"]:focus,
+form input[type="checkbox"]:focus,
+form input[type="password"]:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+    border: 3px solid var(--primary-color);
+}
+
+/* ---- Modals ---- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #F0F8FF;
+    margin: 5% auto;
+    padding: 30px;
+    border: 1px solid var(--primary-color);
+    width: 70%;
+    border-radius: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(64, 144, 214, 0.3);
+}
+
+.modal-content img {
+    flex: 0 0 50%;
+    height: auto;
+    border-radius: 5px;
+}
+
+
+.modal-content .text-content h2 {
+    margin-bottom: 10px;
+    color: #2E5C8A;
+    font-weight: 600;
+}
+
+.modal-content .text-content p {
+    margin: 8px 0;
+    color: #2C3E50;
+}
+
+.modal-content .text-content button {
+    margin: 10px 5px;
+    font-weight: 500;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+/* ---- Login Modal ---- */
+.login-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.login-modal-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    width: 340px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+}
+
+.login-modal-content h2 {
+    margin-bottom: 10px;
+}
+
+#profile-pic {
+    border-radius: 50%;
+    margin-right: 0;
+    margin-bottom: 4px;
+}
+
+#user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 25px;
+}
+
+/* ---- Responsive Design ---- */
+@media only screen and (max-width: 600px) {
+    .item {
+        flex: 0 1 100%;
+    }
+
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .benefit-grid {
+        grid-template-columns: 1fr;
+    }
 }

@@ -1,26 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
-import Footer from "./components/Footer";
-import Header from './components/Header'
+import Header from './components/NavBar';
+import Footer from './components/Footer';
+import { Routes, Route } from 'react-router-dom';
+import Index from './pages/Index';
+import Products from './pages/Products';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
+import About from './pages/About';
+import './index.css';
 
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <Header active_page="home" />
-      <div className="App">
-        <h1>Welcome to Critter Haven Crafts!</h1>
-        <p>Your one-stop shop for adorable, handmade critter-themed crafts. Explore our collection of unique items, perfect for any critter lover.</p>
-        <img src={heroImg} alt="Hero Image" className="hero-image" />
-      </div>
-      <Footer />
-    </>
-  )
-}
+    <div className="site-shell">
+      <Header />
 
-export default App
+      <main className="page-content container">
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
