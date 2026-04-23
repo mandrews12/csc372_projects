@@ -48,8 +48,8 @@ export default function Contact() {
                 <input type="email" id="email" name="email" placeholder="Your Email" required onChange={handleChange}></input>
                 <label for="message">Message</label>
                 <textarea id="message" name="message" rows="5" placeholder="Your Message" required onChange={handleChange}></textarea>
-                <button type="submit" className="button" disabled={!isValid}> Submit Message </button>
-                {!isValid && (
+                <button type="submit" className="button" > Submit Message </button>
+                {submitted && !isValid && (
                 <p className="error-message">
                     Please fill out all fields. Email must include @, and message must be at least 10 characters.
                 </p>

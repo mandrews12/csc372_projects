@@ -57,16 +57,20 @@ li {
     top: 0;
 }
 /* ---- Nav Login Button ---- */
-#nav-login-btn {
+#nav-login-btn, #nav-logout-btn {
     margin-top: 0;
     padding: 8px 20px;
-    font-size: .75em;
     margin-left: 20px;
 }
 
-#nav-login-btn i {
+button {
+    font-size: medium;
+}
+
+#nav-login-btn i, #nav-logout-btn i {
     margin-right: 5px;
 }
+
 .header img {
     max-height: 125px;
     border-radius: 8px;
@@ -113,7 +117,6 @@ nav a:hover {
 .header-card h1 {
     color: var(--primary-foreground);
     font-weight: bold;
-    font-size: 3.5em;
 }
 
 #welcome-card p {
@@ -129,7 +132,7 @@ nav a:hover {
 
 .card {
     text-align: center;
-    padding: 96px 16px;
+    padding: 60px 16px;
 }
 
 .left-card {
@@ -139,7 +142,6 @@ nav a:hover {
 /* Section-specific card backgrounds and sizing */
 #benefits {
     background-color: var(--muted-color);
-    font-size: 1.3em;
 }
 
 #benefits p {
@@ -148,7 +150,6 @@ nav a:hover {
 
 #about {
     background-color: var(--warm-color);
-    font-size: 1.3em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -156,7 +157,6 @@ nav a:hover {
 
 #featured {
     background-color: var(--primary-foreground);
-    font-size: 1.3em;
 }
 
 /* ---- Benefits Grid ---- */
@@ -201,7 +201,6 @@ button, form input[type="submit"] {
     cursor: pointer;
     font-weight: 500;
     font-family: 'Serif', 'serif';
-    font-size: .9em;
     margin-top: 40px;
 }
 
@@ -216,9 +215,31 @@ button:hover, form input[type="submit"]:hover {
 /* ---- Featured Items ---- */
 .featured-items {
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
+    gap: 20px;
+
+    flex-wrap: nowrap;   
+    overflow-x: auto;   
+    overflow-y: hidden;
+
+    padding-bottom: 10px;      
+    scroll-behavior: smooth;    
+}
+
+.featured-items .item img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+.featured-items .item {
+    width: 250px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-items .item button {
+    margin-top: auto;   
 }
 
 /* ---- Product Grid ---- */
@@ -237,8 +258,9 @@ button:hover, form input[type="submit"]:hover {
 
 #cards .item img {
     width: 100%;
-    height: auto;
-    max-height: 150px;
+    height: 300px;        
+    object-fit: contain;
+    border-radius: 6px; 
 }
 
 .item {
@@ -285,6 +307,13 @@ form {
     line-height: 2;
 }
 
+.cat-options {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
 #contact-form {
     font-size: 1.1em;
 }
@@ -328,28 +357,36 @@ form textarea:focus {
 
 /* ---- Modals ---- */
 .modal {
-    display: none;
     position: fixed;
-    z-index: 200;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0; /* replaces top/left/width/height */
+
+    display: flex;              /* 👈 key */
+    justify-content: center;    /* horizontal center */
+    align-items: center;        /* vertical center */
+
     background-color: rgba(0, 0, 0, 0.4);
+    z-index: 200;
 }
 
 .modal-content {
     background-color: #F0F8FF;
-    margin: 5% auto;
+
     padding: 30px;
     border: 1px solid var(--primary-color);
-    width: 70%;
     border-radius: 12px;
+
     display: flex;
-    align-items: flex-start;
     gap: 20px;
-    text-align: left;
+
     box-shadow: 0 10px 30px rgba(64, 144, 214, 0.3);
+}
+
+.modal-content img {
+    width: 300px;        
+    max-width: 100%;     
+    height: auto;        
+    object-fit: contain; 
+    border-radius: 5px;
 }
 
 .modal-content img {
@@ -388,15 +425,13 @@ form textarea:focus {
 
 /* ---- Login Modal ---- */
 .login-modal {
-    display: none;
     position: fixed;
     z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0; 
     background-color: rgba(0,0,0,0.6);
-    justify-content: center;
+
+    display: flex;              
+    justify-content: center;   
     align-items: center;
 }
 

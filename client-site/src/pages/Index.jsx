@@ -1,12 +1,36 @@
 import { useNavigate } from 'react-router-dom';
 import productPlaceholder from '../assets/product_placeholder.png';
+import product_pic from '../assets/product_placeholder.png';
 import FeaturedProducts from '../components/FeaturedProducts';
 import Benefits from '../components/Benefits';
+import LoginModal from '../components/LoginModal';
+import { supabase } from '../utils/supabase';
+import { useState, useEffect } from 'react';
 
 export default function Index () {
     const navigate = useNavigate();
+        const [products, setProducts] = useState([]);
+    
+        useEffect(() => {
+            async function fetchProducts() {
+                const { data, error } = await supabase
+                    .from('products')
+                    .select('*')
+                    .eq('featured', true);
+
+                if (error) {
+                    console.error('Error fetching products:', error);
+                } else {
+                    setProducts(data);
+                }
+            }
+    
+            fetchProducts();
+        }, []);
+
     return (
     <section>
+        <LoginModal />
         <div className="header-card" id="welcome-card">
             <p> HANDCRAFTED GOODS </p>
             <h1>Critter Haven Crafts</h1>
@@ -14,25 +38,27 @@ export default function Index () {
             <button onClick={() => navigate('/products')}>Explore Collection</button>
         </div>
 
-        <div class = "card" id="about">
-            <div class="about-content">
+        <div className="card">
+            <h1>Featured Items</h1>
+            <div className="featured-items">
+                {products.map((product) => (
+                <FeaturedProducts 
+                    key={product.id}
+                    name={product.product_name}
+                    price={product.price}
+                    product_pic={product.image || product_pic}
+                />
+                ))}
+             </div>
+        </div>
+
+        <div className="card" id="about">
+            <div className="about-content">
                 <h1>Our Story</h1>
                 <hr></hr>
                 <p>Critter Haven Crafts creates handmade, one-of-a-kind pieces designed to bring warmth, creativity, and personality into everyday life. Each item is thoughtfully crafted with care and attention to detail, offering unique gifts and décor you won’t find in mass-produced stores.   </p>
                 <button onClick={() => navigate('/about')}>Learn More</button>
             </div>
-        </div>
-
-        <div className="card">
-            <h1>Featured Items</h1>
-            <div className="featured-items">
-                <FeaturedProducts name="Cardinal Lantern" price={25.00} product_pic={productPlaceholder} />
-                <FeaturedProducts name="Alcohol Ink Flower" price={30.00} product_pic={productPlaceholder} />
-                <FeaturedProducts name="Asorted Cards" price={10.00} product_pic={productPlaceholder} />
-                <FeaturedProducts name="Shadowbox" price={40.00} product_pic={productPlaceholder} />
-                <FeaturedProducts name="Alcohol Ink Tile" price={25.00} product_pic={productPlaceholder} />
-                <FeaturedProducts name="Papercraft Item" price={15.00} product_pic={productPlaceholder} />
-             </div>
         </div>
 
         <div className="card" id="benefits">
