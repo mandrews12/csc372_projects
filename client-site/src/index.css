@@ -56,20 +56,6 @@ li {
     position: sticky;
     top: 0;
 }
-/* ---- Nav Login Button ---- */
-#nav-login-btn, #nav-logout-btn {
-    margin-top: 0;
-    padding: 8px 20px;
-    margin-left: 20px;
-}
-
-button {
-    font-size: medium;
-}
-
-#nav-login-btn i, #nav-logout-btn i {
-    margin-right: 5px;
-}
 
 .header img {
     max-height: 125px;
@@ -94,9 +80,42 @@ nav a:hover {
     color: var(--primary-color);
 }
 
+/* ---- Buttons ---- */
+button, form input[type="submit"] {
+    background-color: var(--primary-color);
+    color: var(--primary-foreground);
+    border: none;
+    padding: 12px 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: 'Serif', 'serif';
+    font-size: medium;
+}
+
+button:hover, form input[type="submit"]:hover {
+    background-color: #3070B0;
+}
+
+/* ---- Nav Buttons ---- */
+#nav-login-btn, #nav-logout-btn {
+    margin-top: 0;
+    padding: 8px 20px;
+    margin-left: 20px;
+}
+
+#nav-login-btn i, #nav-logout-btn i {
+    margin-right: 5px;
+}
+
 /* ---- Cards ---- */
-#welcome-card {
-    height: 600px;
+.card {
+    text-align: center;
+    padding: 30px 16px;
+}
+
+.left-card {
+    padding: 20px 40px;
 }
 
 .header-card {
@@ -119,9 +138,14 @@ nav a:hover {
     font-weight: bold;
 }
 
+/* ---- Welcome Card ---- */
+#welcome-card {
+    height: 600px;
+}
+
 #welcome-card p {
     color: var(--accent-color);
-    font-weight: thin;
+    font-weight: 100;
     letter-spacing: 0.3em;
 }
 
@@ -130,16 +154,7 @@ nav a:hover {
     font-weight: 50;
 }
 
-.card {
-    text-align: center;
-    padding: 60px 16px;
-}
-
-.left-card {
-    padding: 20px 40px;
-}
-
-/* Section-specific card backgrounds and sizing */
+/* ---- Section-Specific Cards ---- */
 #benefits {
     background-color: var(--muted-color);
 }
@@ -179,7 +194,7 @@ nav a:hover {
     color: var(--primary-foreground);
     background-color: var(--primary-color);
     border-radius: 50%;
-    padding: 16px;
+    padding: 10px;
 }
 
 /* ---- About Section ---- */
@@ -191,62 +206,45 @@ nav a:hover {
     line-height: 1.5;
 }
 
-/* ---- Buttons ---- */
-button, form input[type="submit"] {
-    background-color: var(--primary-color);
-    color: var(--primary-foreground);
-    border: none;
-    padding: 12px 40px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: 500;
-    font-family: 'Serif', 'serif';
-    margin-top: 40px;
-}
-
-button:hover, form input[type="submit"]:hover {
-    background-color: #3070B0;
-}
-
-.cat-btn {
-    margin: 20px 20px;
-}
-
 /* ---- Featured Items ---- */
 .featured-items {
     display: flex;
     gap: 20px;
-
-    flex-wrap: nowrap;   
-    overflow-x: auto;   
+    flex-wrap: nowrap;
+    overflow-x: auto;
     overflow-y: hidden;
-
-    padding-bottom: 10px;      
-    scroll-behavior: smooth;    
-}
-
-.featured-items .item img {
-    width: 100%;
-    height: 200px;
-    object-fit: contain;
+    scroll-behavior: smooth;
 }
 
 .featured-items .item {
     width: 250px;
-    height: 360px;
+    height: 400px;
     display: flex;
     flex-direction: column;
 }
 
+.featured-items .item img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+}
+
 .featured-items .item button {
-    margin-top: auto;   
+    margin-top: auto;
 }
 
 /* ---- Product Grid ---- */
+#filters .cat-options {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
 #cards {
     display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 20px;
+    grid-template-columns: auto auto auto auto;
+    gap: 1px;
     align-items: start;
 }
 
@@ -258,15 +256,18 @@ button:hover, form input[type="submit"]:hover {
 
 #cards .item img {
     width: 100%;
-    height: 300px;        
+    height: 300px;
     object-fit: contain;
-    border-radius: 6px; 
+    border-radius: 6px;
 }
 
+/* ---- Product Items ---- */
 .item {
     border-radius: 8px;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
+    margin-top: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .item:hover {
@@ -274,7 +275,6 @@ button:hover, form input[type="submit"]:hover {
     box-shadow: 0 8px 20px rgba(64, 144, 214, 0.3);
 }
 
-/* Scoped to img inside .item to avoid interfering with other hover states */
 .item img:hover {
     transform: scale(1.05);
     transition: transform 0.3s;
@@ -294,7 +294,7 @@ footer {
 }
 
 footer h1 {
-    color: var(--primary-foreground);  /* white */
+    color: var(--primary-foreground);
 }
 
 /* ---- Forms ---- */
@@ -305,13 +305,6 @@ form {
     width: 50%;
     margin: 0 auto;
     line-height: 2;
-}
-
-.cat-options {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
 }
 
 #contact-form {
@@ -334,14 +327,21 @@ form textarea {
     font-size: 1em;
     color: var(--secondary-foreground);
 }
+
 form select {
     height: auto;
 }
+
 form textarea {
     height: 100px;
 }
-form input[type="checkbox"]{
+
+form input[type="checkbox"] {
     transform: scale(1.5);
+}
+
+form input[type="file"] {
+    margin-bottom: 10px;
 }
 
 form input[type="text"]:focus,
@@ -349,6 +349,7 @@ form input[type="email"]:focus,
 form input[type="number"]:focus,
 form input[type="checkbox"]:focus,
 form input[type="password"]:focus,
+form input[type="file"]:focus,
 form select:focus,
 form textarea:focus {
     outline: none;
@@ -358,43 +359,34 @@ form textarea:focus {
 /* ---- Modals ---- */
 .modal {
     position: fixed;
-    inset: 0; /* replaces top/left/width/height */
-
-    display: flex;              /* 👈 key */
-    justify-content: center;    /* horizontal center */
-    align-items: center;        /* vertical center */
-
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 200;
 }
 
 .modal-content {
     background-color: #F0F8FF;
-
     padding: 30px;
     border: 1px solid var(--primary-color);
     border-radius: 12px;
-
     display: flex;
     gap: 20px;
-
+    width: 700px;
+    max-width: 90vw;
     box-shadow: 0 10px 30px rgba(64, 144, 214, 0.3);
 }
 
 .modal-content img {
-    width: 300px;        
-    max-width: 100%;     
-    height: auto;        
-    object-fit: contain; 
+    flex: 0 0 300px;
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    background-color: #fff;
     border-radius: 5px;
 }
-
-.modal-content img {
-    flex: 0 0 50%;
-    height: auto;
-    border-radius: 5px;
-}
-
 
 .modal-content .text-content h2 {
     margin-bottom: 10px;
@@ -427,11 +419,10 @@ form textarea:focus {
 .login-modal {
     position: fixed;
     z-index: 9999;
-    inset: 0; 
+    inset: 0;
     background-color: rgba(0,0,0,0.6);
-
-    display: flex;              
-    justify-content: center;   
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
@@ -448,20 +439,34 @@ form textarea:focus {
     margin-bottom: 10px;
 }
 
-#profile-pic {
-    border-radius: 50%;
-    margin-right: 0;
-    margin-bottom: 4px;
+.login-modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-family: 'Serif', 'serif';
+    font-size: 1em;
+    color: var(--secondary-foreground);
+    box-sizing: border-box;
 }
 
-#user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 25px;
+.login-modal-content input:focus {
+    outline: none;
+    border: 3px solid var(--primary-color);
+}
+
+.login-modal-content button {
+    margin-top: 8px;
 }
 
 /* ---- Responsive Design ---- */
+@media only screen and (max-width: 900px) {
+    #cards {
+        grid-template-columns: auto auto;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .item {
         flex: 0 1 100%;
@@ -474,5 +479,9 @@ form textarea:focus {
 
     .benefit-grid {
         grid-template-columns: 1fr;
+    }
+
+    #cards {
+        grid-template-columns: auto;
     }
 }

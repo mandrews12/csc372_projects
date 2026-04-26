@@ -23,7 +23,8 @@ export default function Products() {
         async function fetchProducts() {
             const { data, error } = await supabase
                 .from('products')
-                .select('*');
+                .select('*')
+                .order('product_name', { ascending: true });
 
             if (error) {
                 console.error('Error fetching products:', error);
@@ -49,10 +50,13 @@ export default function Products() {
                 <div className="cat-options">
                     <button onClick={() => setCategory('all')}>All</button>
                     <button onClick={() => setCategory('papercrafts')}>Papercrafts</button>
-                    <button onClick={() => setCategory('ink-flowers')}>Ink Flowers</button>
+                    <button onClick={() => setCategory('ink-flowers-paper')}>Ink Flowers (Paper)</button>
+                    <button onClick={() => setCategory('ink-flowers-tile')}>Ink Flowers (Tile)</button>
                     <button onClick={() => setCategory('shadowboxes')}>Shadowboxes</button>
                     <button onClick={() => setCategory('cards')}>Cards</button>
+                    <button onClick={() => setCategory('miscellaneous')}>Miscellaneous</button>
                 </div>
+                <p> If you see a product you like but is currently unavailable, please reach out as I may be able to craft another one with a choice of colors depending on the product. Custom orders can also be discussed.</p>
             </div>
             <div className="card">
                 <h1>Shop</h1>
@@ -81,14 +85,13 @@ export default function Products() {
                         <img
                             src={selectedProduct.image || product_pic}
                             alt={selectedProduct.product_name}
-                            height="300"
                         />
 
                         <div className="text-content">
                             <h2>{selectedProduct.product_name}</h2>
                             <p>${selectedProduct.price.toFixed(2)}</p>
                             <p>{selectedProduct.description}</p>
-                            <p>
+                            <p style={{ color: selectedProduct.in_stock ? 'green' : 'red' }}>
                                 {selectedProduct.in_stock ? 'In Stock' : 'Out of Stock'}
                             </p>
 

@@ -32,7 +32,7 @@ export default function Index () {
     <section>
         <LoginModal />
         <div className="header-card" id="welcome-card">
-            <p> HANDCRAFTED GOODS </p>
+            <p> HANDMADE CRAFTS </p>
             <h1>Critter Haven Crafts</h1>
             <h3>Handmade pieces that bring warmth and personality into your everyday life</h3>
             <button onClick={() => navigate('/products')}>Explore Collection</button>
@@ -40,6 +40,7 @@ export default function Index () {
 
         <div className="card">
             <h1>Featured Items</h1>
+            <hr></hr>
             <div className="featured-items">
                 {products.map((product) => (
                 <FeaturedProducts 
@@ -66,7 +67,7 @@ export default function Index () {
             <hr></hr>
             <div className="benefit-grid">
                 < Benefits className="fa-solid fa-paintbrush" name="Unique Designs" description="Each item is crafted with care, ensuring you receive a one-of-a-kind piece." />
-                < Benefits className="fa-solid fa-gem" name="Quality Materials" description="We use only the finest materials to create durable and beautiful crafts." />
+                < Benefits className="fa-solid fa-gem" name="Quality Materials" description="We strive to use high quality materials while also bringing affordability to each piece." />
                 < Benefits className="fa-solid fa-heart" name="Support Local Crafters" description="By shopping with us, you support local artisans and their craft." />
                 < Benefits className="fa-solid fa-gift" name="Perfect Gifts" description="We prioritize your satisfaction and strive to provide excellent customer service." />
              </div>

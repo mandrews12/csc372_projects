@@ -41,7 +41,7 @@ export default function Contact() {
             <h1> Get in Touch</h1>
             <hr></hr>
             <p> Have a question, custom order request, or just want to say hello? We'd love to hear from you!</p>
-            <form action="mailto:charm_tails@yahoo.com" onSubmit={handleSubmit}>
+            <form action="mailto:meghan.andrews14@gmail.com" onSubmit={handleSubmit}>
                 <label for="name">Name</label>
                 <input type="text" id="name" placeholder="Full Name" name="name" required onChange={handleChange}></input>
                 <label for="email">Email</label>

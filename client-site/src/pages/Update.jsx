@@ -6,10 +6,13 @@ export default function Update() {
     const [products, setProducts] = useState([]);
     const [selectedProductId, setSelectedProductId] = useState('');
     const [updateForm, setUpdateForm] = useState({
+        name: '',
         price: '',
+        category: '',
         description: '',
         in_stock: false,
         featured: false,
+        image: null,
     });
 
     useEffect(() => {
@@ -31,10 +34,13 @@ export default function Update() {
 
         if (product) {
             setUpdateForm({
+                name: product.product_name || '',
                 price: product.price || '',
                 description: product.description || '',
+                category: product.category || '',
                 in_stock: product.in_stock || false,
                 featured: product.featured || false,
+                image: product.image || null,
             });
         }
     }, [selectedProductId, products]);
@@ -89,13 +95,38 @@ export default function Update() {
     async function updateProduct(e) {
         e.preventDefault();
 
+        const file = updateForm.image instanceof File ? updateForm.image : null;
+
+        let imageUrl = null;
+
+        if (file) {
+            const fileName = `${Date.now()}-${file.name}`;
+
+            const { error: uploadError } = await supabase
+                .storage
+                .from('product-images')
+                .upload(fileName, file);
+
+            if (uploadError) return;
+
+            const { data } = supabase
+                .storage
+                .from('product-images')
+                .getPublicUrl(fileName);
+
+            imageUrl = data.publicUrl;
+        }
+
         const { data, error } = await supabase
             .from('products')
             .update({
+                product_name: updateForm.name,
                 price: updateForm.price ? parseFloat(updateForm.price) : null,
                 description: updateForm.description,
+                category: updateForm.category,
                 in_stock: updateForm.in_stock,
                 featured: updateForm.featured,
+                image: imageUrl || updateForm.image
             })
             .eq('id', selectedProductId)
             .select();
@@ -108,6 +139,7 @@ export default function Update() {
                         : p
                 )
             );
+            setSelectedProductId('');
         }
     }
 
@@ -158,9 +190,11 @@ export default function Update() {
                         <label>Category</label>
                         <select name="category">
                             <option value="papercrafts">Papercrafts</option>
-                            <option value="ink-flowers">Ink Flowers</option>
+                            <option value="ink-flowers-paper">Ink Flowers (Paper)</option>
+                            <option value="ink-flowers-tile">Ink Flowers (Tile)</option>
                             <option value="shadowboxes">Shadowboxes</option>
                             <option value="cards">Cards</option>
+                            <option value="miscellaneous">Miscellaneous</option>
                         </select>
 
                         <label>Price</label>
@@ -201,6 +235,15 @@ export default function Update() {
 
                     {selectedProductId && (
                         <form onSubmit={updateProduct}>
+                            <label>Name</label>
+                            <input 
+                                type="text" 
+                                value={updateForm.name} 
+                                onChange={(e) =>
+                                    setUpdateForm({ ...updateForm, name: e.target.value })
+                                }
+                            />
+
                             <label>Price</label>
                             <input
                                 type="number"
@@ -219,6 +262,21 @@ export default function Update() {
                                 }
                             />
 
+                            <label>Category</label>
+                            <select
+                                value={updateForm.category}
+                                onChange={(e) =>
+                                    setUpdateForm({ ...updateForm, category: e.target.value })
+                                }
+                            >
+                                <option value="papercrafts">Papercrafts</option>
+                                <option value="ink-flowers-paper">Ink Flowers (Paper)</option>
+                                <option value="ink-flowers-tile">Ink Flowers (Tile)</option>
+                                <option value="shadowboxes">Shadowboxes</option>
+                                <option value="cards">Cards</option>
+                                <option value="miscellaneous">Miscellaneous</option>
+                            </select>
+
                             <label>In Stock</label>
                             <input
                                 type="checkbox"
@@ -236,6 +294,17 @@ export default function Update() {
                                     setUpdateForm({ ...updateForm, featured: e.target.checked })
                                 }
                             />
+
+                            <label>Image </label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    setUpdateForm({ ...updateForm, image: file });
+                                }}
+                            />
+
 
                             <button type="submit">Save Changes</button>
                         </form>
