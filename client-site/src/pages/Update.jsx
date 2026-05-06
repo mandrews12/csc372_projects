@@ -1,3 +1,4 @@
+// Component to display the Update page with forms for adding, updating, and deleting products in the Supabase database, along with state management for form inputs and API calls to perform the respective operations
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabase';
 
@@ -15,6 +16,7 @@ export default function Update() {
         image: null,
     });
 
+    // API call to fetch products from the Supabase database and update the products state variable with the retrieved data with error handling
     useEffect(() => {
         async function fetchProducts() {
             const { data, error } = await supabase
@@ -27,11 +29,13 @@ export default function Update() {
         fetchProducts();
     }, []);
 
+    // Effect to populate the update form with the selected product's details when a product is selected from the dropdown, updating the form state variables accordingly
     useEffect(() => {
         if (!selectedProductId) return;
 
         const product = products.find(p => String(p.id) === String(selectedProductId));
 
+        // If the product is found, update the form state variables with the product's details, using default values if any fields are missing to prevent uncontrolled input issues in the form fields
         if (product) {
             setUpdateForm({
                 name: product.product_name || '',
@@ -45,6 +49,7 @@ export default function Update() {
         }
     }, [selectedProductId, products]);
 
+    // Function to handle the submission of the add product form, which uploads the image to Supabase storage if provided and then inserts the new product into the database, updating the products state variable with the newly added product and resetting the form
     async function addProduct(e) {
         e.preventDefault();
 
@@ -53,6 +58,7 @@ export default function Update() {
 
         let imageUrl = null;
 
+        // If an image file is provided, upload it to Supabase storage and get the public URL to include in the new product data
         if (file) {
             const fileName = `${Date.now()}-${file.name}`;
 
@@ -71,6 +77,7 @@ export default function Update() {
             imageUrl = data.publicUrl;
         }
 
+        // Construct the new product object with form values and the image URL, ensuring to parse the price as a float and set the featured and in_stock fields based on the checkbox values
         const newProduct = {
             product_name: form.product_name.value,
             category: form.category.value,
@@ -81,6 +88,7 @@ export default function Update() {
             in_stock: form.stocked.checked,
         };
 
+        // API call to insert the new product into the Supabase database and update the products state variable with the newly added product, with error handling and resetting the form upon successful addition
         const { data, error } = await supabase
             .from('products')
             .insert([newProduct])
@@ -92,6 +100,7 @@ export default function Update() {
         }
     }
 
+    // Function to handle the submission of the update product form, which uploads a new image to Supabase storage if provided and then updates the existing product in the database with the new details, updating the products state variable with the updated product information and resetting the selected product state variable upon successful update
     async function updateProduct(e) {
         e.preventDefault();
 
@@ -99,6 +108,7 @@ export default function Update() {
 
         let imageUrl = null;
 
+        // If a new image file is provided, upload it to Supabase storage and get the public URL to include in the updated product data; if no new image is provided, the existing image URL will be retained in the update
         if (file) {
             const fileName = `${Date.now()}-${file.name}`;
 
@@ -117,6 +127,7 @@ export default function Update() {
             imageUrl = data.publicUrl;
         }
 
+        // API call to update the existing product in the Supabase database with the new details from the form, using the selected product ID to identify which product to update and including the new image URL if a new image was uploaded, with error handling and updating the products state variable with the updated product information upon successful update
         const { data, error } = await supabase
             .from('products')
             .update({
@@ -143,6 +154,7 @@ export default function Update() {
         }
     }
 
+    // Function to handle the submission of the delete product form, which deletes the selected product from the Supabase database based on the product ID and updates the products state variable to remove the deleted product from the list, with error handling and resetting the selected product state variable upon successful deletion
     async function deleteProduct(e) {
         e.preventDefault();
 

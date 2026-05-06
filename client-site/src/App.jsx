@@ -1,3 +1,4 @@
+// Main application component for the client site, which sets up routing, user authentication state management, and renders the NavBar, Footer, and LoginModal components along with the main page content based on the current route. It also checks for admin privileges to conditionally render the update product page for admin users only.
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import LoginModal from './components/LoginModal';
@@ -35,6 +36,7 @@ export default function App() {
     };
   }, []);
 
+  // Check if the user has admin privileges based on their app metadata role, which will be used to conditionally render admin-only routes and features in the application
   const isAdmin = user?.app_metadata?.role === 'admin';
 
   return (

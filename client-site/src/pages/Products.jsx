@@ -1,3 +1,4 @@
+// Component to display the Products page with a list of products fetched from the Supabase database, along with filtering options by category and a modal to view product details
 import product_pic from '../assets/product_placeholder.png';
 import ProductCards from '../components/Product';
 import { supabase } from '../utils/supabase';
@@ -8,17 +9,20 @@ export default function Products() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [category, setCategory] = useState('all');
 
+    // Function to handle the "View Details" button click for a product card, which sets the selected product and opens the modal to display its details
     function handleViewDetails(product) {
         setSelectedProduct(product);
         setIsModalOpen(true);
     }
 
+    // Function to close the product details modal and reset the selected product state variable
     function closeModal() {
         setIsModalOpen(false);
         setSelectedProduct(null);
     }
     const [products, setProducts] = useState([]);
 
+    // API call to fetch products from the Supabase database and update the products state variable with the retrieved data, with error handling and sorting by product name in ascending order
     useEffect(() => {
         async function fetchProducts() {
             const { data, error } = await supabase
@@ -36,6 +40,7 @@ export default function Products() {
         fetchProducts();
     }, []);
 
+    // Filter the products based on the selected category, showing all products if the "all" category is selected or filtering by the specific category otherwise
     const filteredProducts = category === 'all'? products : products.filter(p => p.category === category);
 
     return (
@@ -72,6 +77,7 @@ export default function Products() {
                             stock={product.in_stock}
                             product_pic={product.image || product_pic}
                             onViewDetails={() => handleViewDetails(product)}
+                            in_stock={product.in_stock}
                         />
                     ))}
                 </div>

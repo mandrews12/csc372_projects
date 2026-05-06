@@ -1,3 +1,4 @@
+// Component to display featured products on the homepage
 export default function FeaturedProducts({name, price, product_pic}) {
   return (
     <article className="card">

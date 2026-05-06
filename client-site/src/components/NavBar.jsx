@@ -1,13 +1,17 @@
+// Component to display the navigation bar with links to different pages and user authentication options
+
 import { NavLink } from 'react-router-dom';
 import { supabase } from '../utils/supabase';
 import logo from '../assets/logo.png';
 
 function NavBar({ user, setIsModalOpen }) {
 
+    // API call to handle user logout using Supabase authentication
     async function handleLogout() {
         await supabase.auth.signOut();
     }
 
+    // Function to open the login/signup modal and prevent background scrolling when the modal is open
     function openModal() {
         setIsModalOpen(true);
         document.body.style.overflow = 'hidden';
@@ -15,6 +19,7 @@ function NavBar({ user, setIsModalOpen }) {
 
     const isAdmin = user?.app_metadata?.role === 'admin';
 
+    // JSX for the navigation bar with links to Home, About, Products, Contact, and Manage Products (for admin users), as well as Login/Logout buttons based on the user's authentication status
     return (
         <div className="header">
             <img src={logo} alt="Critter Haven Crafts Logo" height="200" />

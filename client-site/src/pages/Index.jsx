@@ -1,3 +1,4 @@
+// Component to display the homepage with a welcome message, featured products, and information about the business and its benefits, along with a login modal for user authentication
 import { useNavigate } from 'react-router-dom';
 import productPlaceholder from '../assets/product_placeholder.png';
 import product_pic from '../assets/product_placeholder.png';
@@ -9,24 +10,25 @@ import { useState, useEffect } from 'react';
 
 export default function Index () {
     const navigate = useNavigate();
-        const [products, setProducts] = useState([]);
-    
-        useEffect(() => {
-            async function fetchProducts() {
-                const { data, error } = await supabase
-                    .from('products')
-                    .select('*')
-                    .eq('featured', true);
+    const [products, setProducts] = useState([]);
 
-                if (error) {
-                    console.error('Error fetching products:', error);
-                } else {
-                    setProducts(data);
-                }
+    // API call to fetch featured products from the Supabase database and update the products state variable with the retrieved data with error handling
+    useEffect(() => {
+        async function fetchProducts() {
+            const { data, error } = await supabase
+                .from('products')
+                .select('*')
+                .eq('featured', true);
+
+            if (error) {
+                console.error('Error fetching products:', error);
+            } else {
+                setProducts(data);
             }
-    
-            fetchProducts();
-        }, []);
+        }
+
+        fetchProducts();
+    }, []);
 
     return (
     <section>

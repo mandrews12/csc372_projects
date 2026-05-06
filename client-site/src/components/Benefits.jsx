@@ -1,3 +1,4 @@
+// Component to display the benefits of using the service
 export default function Benefits({className, name, description}) {
   return (
     <article className="card">

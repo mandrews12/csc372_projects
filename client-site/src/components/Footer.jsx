@@ -1,3 +1,4 @@
+// Component to display the footer of the website
 function Footer() {
     return (
         <footer>

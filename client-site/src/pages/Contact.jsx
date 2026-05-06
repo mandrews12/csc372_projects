@@ -1,3 +1,4 @@
+// Component to display the Contact Us page with a form for users to submit their name, email, and message, along with validation and feedback messages upon submission
 import { useState } from 'react';
 
 // Starting values for all form fields
@@ -12,7 +13,7 @@ export default function Contact() {
     const [formData, setFormData] = useState(initialFormData);
     const [submitted, setSubmitted] = useState(false);
 
-      // Reusable change handler — uses input's name to update the correct field
+    // Reusable change handler — uses input's name to update the correct field
     function handleChange(e) {
         setFormData((currentData) => ({
         ...currentData,

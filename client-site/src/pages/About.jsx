@@ -1,3 +1,4 @@
+// Component to display the About Us page with information about the business and the crafter, including a photo of the crafter
 import pic from '../assets/client_headshot.png';
 export default function About() {
     return (

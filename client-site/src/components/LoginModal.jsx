@@ -1,3 +1,5 @@
+// Component to handle user login and signup using Supabase authentication
+
 import { data } from 'react-router-dom';
 import { supabase } from '../utils/supabase';
 import { useState } from 'react';
@@ -14,6 +16,7 @@ export default function LoginModal({ isOpen, setIsOpen }) {
         document.body.style.overflow = 'auto';
     }
 
+    // API call to handle user login using Supabase authentication
     async function handleLogin() {
         const { data, error } = await supabase.auth.signInWithPassword({
             email,
@@ -28,6 +31,7 @@ export default function LoginModal({ isOpen, setIsOpen }) {
         }
     }
 
+    // API call to handle user signup using Supabase authentication
     async function handleSignup() {
         const { error } = await supabase.auth.signUp({
             email,
@@ -47,6 +51,7 @@ export default function LoginModal({ isOpen, setIsOpen }) {
 
     if (!isOpen) return null;
 
+    // Modal content for login and signup forms that toggles based on the isSignup state variable
     return (
         <div className="login-modal">
             <div className="login-modal-content">

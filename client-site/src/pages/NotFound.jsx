@@ -1,3 +1,4 @@
+// Component to display a 404 Not Found page when the user navigates to a route that does not exist
 export default function NotFound() {
   return (
     <section className="card">
